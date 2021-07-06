@@ -17,27 +17,32 @@ class APICall {
     func fetchData(category: PassUrl, completion:  @escaping (_ article: Articles ) -> Void )  {
         var url: URL?
         
-        let urlCat = URL(string:  "\(K.url)top-headlines?country=us&category=\(category.categoryName.lowercased())&apiKey=\(K.APIKey)")
+        let urlCat = URL(string:  "\(K.url)top-headlines?country=us&category=\(category.categoryName?.lowercased() ?? "")&apiKey=\(K.APIKey)")
         
+
         
         guard let urlSource = URL(string: "https://newsapi.org/v2/top-headlines?sources=\(category.id ?? "")&apiKey=\(K.APIKey)") else {return}
         
-        guard let urlSearch = URL(string: "\(K.url)everything?q=\(category.searchText ?? "" )&apiKey=\(K.APIKey)") else {return}
-        
-        if category.id == nil  {
-            url = urlCat
-        } else if category.searchText != nil {
-            url = urlSearch
-        }
-        else {
+        guard let urlSearch = URL(string: "\(K.url)everything?q=\(category.searchText?.lowercased() ?? "" )&apiKey=\(K.APIKey)") else {return}
+//
+        if category.id != nil {
             url = urlSource
         }
+        else if category.id == nil && category.categoryName != "" {
+            url = urlCat
+        }
+        
+    else {
+        url = urlSearch
+        }
+        
+        print(url)
         
         if let url = url {
             let task = session.dataTask(with: url) { (data, respone, error) in
                 if error == nil && data != nil {
                     do {
-
+                        
                         let result = try JSONDecoder().decode(Articles.self, from: data!)
                         completion(result)
                         print(result)

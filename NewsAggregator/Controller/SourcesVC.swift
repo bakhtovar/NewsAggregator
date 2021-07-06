@@ -17,9 +17,9 @@ class SourcesVC: UIViewController {
     var category = CategoriesBrain()
     
     var sources: Sources?
-    
+   
     var filteredData: Sources?
-    var sourceName : String?
+    
     
     
     
@@ -121,6 +121,19 @@ extension SourcesVC :
 
 extension SourcesVC: UISearchBarDelegate {
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+            guard !searchText.isEmpty  else {
+                sources?.sources = filteredData!.sources
+                sourcesCollectionView.reloadData()
+                return
+            }
     
-    
+        sources?.sources = (filteredData?.sources.filter({ source -> Bool in
+            (source.name?.lowercased().contains(searchText.lowercased()))!
+        }))!
+         sourcesCollectionView.reloadData()
+        
+        
+    }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct Sources: Codable {
-    let sources: [SourceModel]
+    var sources: [SourceModel]
 }
 
 

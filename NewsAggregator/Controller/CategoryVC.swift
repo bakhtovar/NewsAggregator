@@ -28,12 +28,16 @@ class CategoryVC: UIViewController  {
         myTableView.dataSource = self
         
         myTableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "articleCell")
-        
-        title = titleName
-        
-        print("\(labelText) this is text")
-        
-        
+   
+        if titleName != nil {
+            self.title = titleName
+        } else if labelText != nil {
+            if articles?.articles == nil {
+                self.title = "No results for \(labelText ?? "")"
+            } else {
+                self.title = "Results for \(labelText ?? "")"
+            }
+        }
         
         myTableView.isSkeletonable = true
         myTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .emerald), animation: nil, transition: .crossDissolve(0.25))

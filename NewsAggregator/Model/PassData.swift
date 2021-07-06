@@ -8,7 +8,7 @@
 import Foundation
 
 struct PassUrl {
-    var categoryName: String
+    var categoryName: String?
     var id: String?
     var searchText: String?
 }

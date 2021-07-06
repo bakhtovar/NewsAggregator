@@ -93,7 +93,7 @@ extension CategoriesVC: UISearchBarDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "CategoryVC") as! CategoryVC
        
-        vc.labelText = searchText.lowercased()
+        vc.labelText = searchText
         self.navigationController?.pushViewController(vc, animated: true)
 
 
