@@ -11,6 +11,7 @@ struct PassUrl {
     var categoryName: String?
     var id: String?
     var searchText: String?
+    var pageInt: Int
 }
 
 struct PassTitle {

@@ -30,6 +30,8 @@
 		D3D8703A2685992300F3E0C7 /* SourcesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D870382685992300F3E0C7 /* SourcesCell.swift */; };
 		D3D8703B2685992300F3E0C7 /* SourcesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3D870392685992300F3E0C7 /* SourcesCell.xib */; };
 		D3D870432685DACF00F3E0C7 /* WebviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D870422685DACF00F3E0C7 /* WebviewVC.swift */; };
+		D3F94D9726942488004D9FDE /* SpinnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F94D9526942488004D9FDE /* SpinnerCell.swift */; };
+		D3F94D9826942488004D9FDE /* SpinnerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F94D9626942488004D9FDE /* SpinnerCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		D3D870382685992300F3E0C7 /* SourcesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesCell.swift; sourceTree = "<group>"; };
 		D3D870392685992300F3E0C7 /* SourcesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourcesCell.xib; sourceTree = "<group>"; };
 		D3D870422685DACF00F3E0C7 /* WebviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebviewVC.swift; sourceTree = "<group>"; };
+		D3F94D9526942488004D9FDE /* SpinnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerCell.swift; sourceTree = "<group>"; };
+		D3F94D9626942488004D9FDE /* SpinnerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpinnerCell.xib; sourceTree = "<group>"; };
 		F61C7A6DFC2373CEDB9B5F5B /* Pods-NewsAggregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsAggregator.debug.xcconfig"; path = "Target Support Files/Pods-NewsAggregator/Pods-NewsAggregator.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,6 +152,8 @@
 				D3352F0A267BDAE1004103DC /* ArticleCell.xib */,
 				D3D870382685992300F3E0C7 /* SourcesCell.swift */,
 				D3D870392685992300F3E0C7 /* SourcesCell.xib */,
+				D3F94D9526942488004D9FDE /* SpinnerCell.swift */,
+				D3F94D9626942488004D9FDE /* SpinnerCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -228,6 +234,7 @@
 				D3B36124267B2BE1002DB248 /* Main.storyboard in Resources */,
 				D3352F0C267BDAE1004103DC /* ArticleCell.xib in Resources */,
 				D3B36142267B2F99002DB248 /* CategoryCell.xib in Resources */,
+				D3F94D9826942488004D9FDE /* SpinnerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +303,7 @@
 				D3352F02267BD984004103DC /* APICall.swift in Sources */,
 				D31728A8268A3A7B004E084D /* SourceModel.swift in Sources */,
 				D3B36141267B2F99002DB248 /* CategoryCell.swift in Sources */,
+				D3F94D9726942488004D9FDE /* SpinnerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

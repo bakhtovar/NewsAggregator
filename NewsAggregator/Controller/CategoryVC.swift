@@ -18,62 +18,80 @@ class CategoryVC: UIViewController  {
     var urlString: String?
     var sourceId : String?
     var labelText: String?
- 
-   
+    var pageNumber: Int = 1
+    var sourceName: String?
+    
+    
+    var catPass: PassUrl!
+    
+    var spinner = UIActivityIndicatorView()
+    
+    // var current = 1
+    var total = 4
+    
+    
+    
     @IBOutlet weak var myTableView: UITableView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         myTableView.delegate = self
         myTableView.dataSource = self
         
+        
         myTableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "articleCell")
-   
+        myTableView.register(UINib(nibName: "SpinnerCell", bundle: nil), forCellReuseIdentifier: "SpinnerCell")
         if titleName != nil {
             self.title = titleName
-        } else if labelText != nil {
-            if articles?.articles == nil {
-                self.title = "No results for \(labelText ?? "")"
-            } else {
-                self.title = "Results for \(labelText ?? "")"
-            }
+        } else {
+            self.title = sourceName
         }
+        
         
         myTableView.isSkeletonable = true
         myTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .emerald), animation: nil, transition: .crossDissolve(0.25))
         myTableView.startSkeletonAnimation()
- 
+        
         myTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .emerald), animation: nil, transition: .crossDissolve(0.25))
         
         
-        let catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText)
-      
-    
-    //MARK: - dkldkldkldflkfdkldfklfdkldfkl
+        catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)
+        
+        
+        //MARK: - dkldkldkldflkfdkldfklfdkldfkl
         APICall.shared.fetchData(category: catPass) { (response) in
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 self.articles = response
                 self.myTableView.reloadData()
                 self.myTableView.stopSkeletonAnimation()
                 self.myTableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+                if self.labelText != "" && self.sourceName == nil && self.titleName == nil {
+                    if self.articles?.articles.count == 0 {
+                        self.title = "No results for \(self.labelText ?? "")"
+                    } else if self.articles?.articles.count != 0  {
+                        self.title = "Results for \(self.labelText ?? "")"
+                    }
                 }
+                // let lastItem = (self.articles?.articles.count ?? 2) - 1
+                //print("\(lastItem) = last")
+            }
+            
         }
     }
 }
-
 extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles?.articles.count ?? 10
         
     }
-
+    
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles?.articles.count ?? 10
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return "articleCell" 
+        return "articleCell"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,9 +105,77 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
                 cell.imageIcon.kf.setImage(with: image, placeholder: nil)
             }
         }
+        
+        
+        
         return cell
+        
     }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastItem = (articles?.articles.count ?? 2) - 1
+         print((articles?.articles.count ?? 2) - 1)
+        if pageNumber < total && indexPath.row == lastItem  {
+            pageNumber += 1
+            // print(pageNumber)
+            catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)
+
+            APICall.shared.fetchData(category: catPass) { (response) in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.articles?.articles.append(contentsOf: response.self.articles)
+                    self.myTableView.reloadData()
+                }
+            }
+        }
+        //print("\(articles?.articles.count) = total ")
+        // print(pageNumber)
+    }
+    //
+    //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    //
+    //        let lastItem = (articles?.articles.count ?? 2) - 1
+    //
+    //        if lastItem == indexPath.row {
+    //
+    //            if pageNumber < 100 {
+    //                pageNumber += 1
+    //
+    //                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+    //                    self.catPass = PassUrl(categoryName: self.titleName ?? "", id: self.sourceId, searchText: self.labelText, pageInt: self.pageNumber)
+    //
+    //                    APICall.shared.fetchData(category: self.catPass) { (response) in
+    //                    DispatchQueue.main.async {
+    //                        self.articles = response
+    //                        self.myTableView.reloadData()
+    //                    }
+    //                }
+    //
+    //                }
+    //
+    //            }
+    //        }
+    //    }
     
+    
+//            func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//                let position = scrollView.contentOffset.y
+//                if position > (myTableView.contentSize.height - 100 - scrollView.frame.size.height) {
+//                           // print(lastItem)
+//                    if pageNumber < total   {
+//                    pageNumber += 1
+//                    catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)
+//
+//                    APICall.shared.fetchData(category: catPass) { (response) in
+//                        DispatchQueue.main.async {
+//                            self.articles?.articles.append(contentsOf: response.self.articles)
+//                            self.myTableView.reloadData()
+//                        }
+//                    }
+//                          }
+//
+//                }
+//
+//            }
+//
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -102,7 +188,6 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
         return 100
     }
 }
-
 
 
 

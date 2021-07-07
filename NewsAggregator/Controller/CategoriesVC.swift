@@ -95,17 +95,10 @@ extension CategoriesVC: UISearchBarDelegate {
        
         vc.labelText = searchText
         self.navigationController?.pushViewController(vc, animated: true)
-
-
-//        if vc.articles == nil  {
-//            vc.labelText = "No Results for \(searchText)"
-//            self.navigationController?.pushViewController(vc, animated: true)
-//
-//        } else {
-//            vc.labelText = "Results for \(searchText)"
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
         
+        if searchBar.text != nil {
+            searchBar.text = ""
+        }
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
@@ -116,11 +109,6 @@ extension CategoriesVC: UISearchBarDelegate {
             return false
         }
     }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("\(searchText) search")
-    }
-    
 
 }
 

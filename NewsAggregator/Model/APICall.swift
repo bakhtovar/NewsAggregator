@@ -17,26 +17,24 @@ class APICall {
     func fetchData(category: PassUrl, completion:  @escaping (_ article: Articles ) -> Void )  {
         var url: URL?
         
-        let urlCat = URL(string:  "\(K.url)top-headlines?country=us&category=\(category.categoryName?.lowercased() ?? "")&apiKey=\(K.APIKey)")
-        
-
+        let urlCat = URL(string: "\(K.url)top-headlines?country=us&page=\(category.pageInt)&category=\(category.categoryName?.lowercased() ?? "")&apiKey=\(K.APIKey)")
         
         guard let urlSource = URL(string: "https://newsapi.org/v2/top-headlines?sources=\(category.id ?? "")&apiKey=\(K.APIKey)") else {return}
         
-        guard let urlSearch = URL(string: "\(K.url)everything?q=\(category.searchText?.lowercased() ?? "" )&apiKey=\(K.APIKey)") else {return}
-//
-        if category.id != nil {
-            url = urlSource
-        }
-        else if category.id == nil && category.categoryName != "" {
+        guard let urlSearch = URL(string: "\(K.url)everything?q=\(category.searchText?.lowercased() ?? "" )&page=\(category.pageInt)&apiKey=\(K.APIKey)") else {return}
+        
+        if category.categoryName != "" && category.id == nil {
             url = urlCat
+        } else if category.id != nil {
+            url = urlSource
+        } else if category.categoryName == "" && category.id == nil {
+            url = urlSearch
         }
         
-    else {
-        url = urlSearch
-        }
-        
+       
         print(url)
+        
+        print("\(category.pageInt) = page")
         
         if let url = url {
             let task = session.dataTask(with: url) { (data, respone, error) in
@@ -45,7 +43,6 @@ class APICall {
                         
                         let result = try JSONDecoder().decode(Articles.self, from: data!)
                         completion(result)
-                        print(result)
                     }
                     catch {
                         print("Error. Try Again")
@@ -81,3 +78,4 @@ class APICall {
     
     
 }
+

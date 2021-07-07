@@ -113,7 +113,7 @@ extension SourcesVC :
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let vc = storyboard.instantiateViewController(identifier: "CategoryVC") as! CategoryVC
-        vc.titleName = tappedCategory?.name
+        vc.sourceName = tappedCategory?.name
         vc.sourceId = tappedCategory?.id
         self.navigationController?.pushViewController(vc, animated: true)
     }

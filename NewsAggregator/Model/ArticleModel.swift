@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct Articles: Codable {
-    let articles: [Article]
+    var articles: [Article]
 }
 
 struct Article: Codable {

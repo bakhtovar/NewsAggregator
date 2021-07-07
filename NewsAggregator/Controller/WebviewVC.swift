@@ -52,5 +52,7 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
             activityIndicator.stopAnimating()
             activityIndicator.isHidden = true
         }
+    
+    
    
 }
