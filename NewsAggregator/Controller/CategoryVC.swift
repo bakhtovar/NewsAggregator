@@ -112,21 +112,23 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
         
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastItem = (articles?.articles.count ?? 2) - 1
-         print((articles?.articles.count ?? 2) - 1)
-        if pageNumber < total && indexPath.row == lastItem  {
+        let lastItem = (articles?.articles.count ?? 2)
+        print(pageNumber)
+        
+        if  pageNumber < total && indexPath.row + 1 == lastItem && articles?.articles.count ?? 2 >= 19 {
+            
             pageNumber += 1
-            // print(pageNumber)
+            
             catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)
 
             APICall.shared.fetchData(category: catPass) { (response) in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                DispatchQueue.main.async {
                     self.articles?.articles.append(contentsOf: response.self.articles)
                     self.myTableView.reloadData()
                 }
             }
         }
-        //print("\(articles?.articles.count) = total ")
+        print("\(articles?.articles.count) = total ")
         // print(pageNumber)
     }
     //
