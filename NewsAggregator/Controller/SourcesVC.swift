@@ -14,13 +14,10 @@ class SourcesVC: UIViewController {
     @IBOutlet weak var sourcesSearch: UISearchBar!
     @IBOutlet weak var sourcesCollectionView: UICollectionView!
     
+    // MARK: - making and instance of structs
     var category = CategoriesBrain()
-    
     var sources: Sources?
-   
     var filteredData: Sources?
-    
-    
     
     
     override func viewDidLoad() {
@@ -35,7 +32,6 @@ class SourcesVC: UIViewController {
                 self.sourcesCollectionView.reloadData()
             }
         }
-        
     }
     
     func configureCollectionView() {
@@ -59,11 +55,11 @@ extension SourcesVC :
     UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout {
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sources?.sources.count ?? 10
     }
     
+    //MARK: - assigning the data
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SourcesCell", for: indexPath) as! SourcesCell
         let vc = sources?.sources[indexPath.row]
@@ -92,6 +88,7 @@ extension SourcesVC :
         
         return cell
     }
+    //MARK: - adding borders
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 5)
@@ -106,7 +103,7 @@ extension SourcesVC :
         return CGSize(width: getWidth, height: getWidth)
     }
     
-    
+    //MARK: - sending the data to CategoryVC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let tappedCategory = sources?.sources[indexPath.row]
         
@@ -122,18 +119,16 @@ extension SourcesVC :
 extension SourcesVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
             guard !searchText.isEmpty  else {
                 sources?.sources = filteredData!.sources
                 sourcesCollectionView.reloadData()
                 return
             }
-    
+        //MARK: - filtering the array by source.name
         sources?.sources = (filteredData?.sources.filter({ source -> Bool in
             (source.name?.lowercased().contains(searchText.lowercased()))!
         }))!
          sourcesCollectionView.reloadData()
-        
         
     }
 }
