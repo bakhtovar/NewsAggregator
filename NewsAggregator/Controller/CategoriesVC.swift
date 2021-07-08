@@ -114,7 +114,6 @@ extension CategoriesVC: UISearchBarDelegate {
             searchBar.text = ""
         }
     }
-    
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         if searchBar.text != "" {
             return true
@@ -124,5 +123,3 @@ extension CategoriesVC: UISearchBarDelegate {
         }
     }
 }
-
-
