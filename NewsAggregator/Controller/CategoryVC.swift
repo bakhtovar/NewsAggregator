@@ -95,8 +95,12 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
+        if  pageNumber < total && indexPath.row + 1 == (articles?.articles.count ?? 2) && articles?.articles.count ?? 2 >= 19 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SpinnerCell", for: indexPath) as! SpinnerCell
+            return cell
+        } else {
         let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! ArticleCell
-        
         if let article = articles?.articles[indexPath.row] {
             cell.titleLabel.text = article.title
             cell.urlLabel.text = article.source.name
@@ -105,10 +109,9 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
                 cell.imageIcon.kf.setImage(with: image, placeholder: nil)
             }
         }
-        
-        
-        
         return cell
+        
+        }
         
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -128,7 +131,7 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
                 }
             }
         }
-        print("\(articles?.articles.count) = total ")
+      
         // print(pageNumber)
     }
     //

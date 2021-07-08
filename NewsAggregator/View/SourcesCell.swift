@@ -23,6 +23,7 @@ class SourcesCell: UICollectionViewCell {
        
         rombCell.layer.cornerRadius = 9
         
+        
    
     }
     
