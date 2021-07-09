@@ -20,14 +20,13 @@
                         <rect key="frame" x="339" y="5" width="135" height="106"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="135" id="754-ll-mDx"/>
-                            <constraint firstAttribute="width" constant="135" id="wVF-Ia-yul"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9u-OH-fLE">
-                        <rect key="frame" x="17" y="5" width="312" height="89.5"/>
+                        <rect key="frame" x="17" y="5" width="317" height="89.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -51,11 +50,11 @@
                     <constraint firstItem="Fef-sv-bRf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Awo-1z-lfd"/>
                     <constraint firstItem="f9u-OH-fLE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Fce-ct-hMA"/>
                     <constraint firstItem="ahI-sq-Iq5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="M86-pC-1wg"/>
+                    <constraint firstItem="Fef-sv-bRf" firstAttribute="leading" secondItem="f9u-OH-fLE" secondAttribute="trailing" constant="5" id="NdS-mK-1Me"/>
                     <constraint firstItem="ahI-sq-Iq5" firstAttribute="top" secondItem="f9u-OH-fLE" secondAttribute="bottom" constant="5" id="UQg-df-CUR"/>
                     <constraint firstAttribute="bottom" secondItem="Fef-sv-bRf" secondAttribute="bottom" constant="5" id="Wqa-1y-2s9"/>
                     <constraint firstItem="f9u-OH-fLE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="c6s-L1-lMq"/>
                     <constraint firstAttribute="trailing" secondItem="Fef-sv-bRf" secondAttribute="trailing" constant="10" id="cwF-9O-VGm"/>
-                    <constraint firstItem="Fef-sv-bRf" firstAttribute="leading" secondItem="f9u-OH-fLE" secondAttribute="trailing" constant="10" id="xav-yf-6Wq"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -64,10 +63,11 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="imageIcon" destination="Fef-sv-bRf" id="5Q6-Z0-1T0"/>
+                <outlet property="imageWidth" destination="754-ll-mDx" id="tQJ-dZ-pCP"/>
                 <outlet property="titleLabel" destination="f9u-OH-fLE" id="bZR-eb-DOK"/>
                 <outlet property="urlLabel" destination="ahI-sq-Iq5" id="7VQ-Ed-9SG"/>
             </connections>
-            <point key="canvasLocation" x="84.057971014492765" y="85.044642857142847"/>
+            <point key="canvasLocation" x="84.057971014492765" y="84.375"/>
         </tableViewCell>
     </objects>
 </document>

@@ -11,7 +11,6 @@ struct Sources: Codable {
     var sources: [SourceModel]
 }
 
-
 struct SourceModel: Codable {
     let id: String?
     let name: String?

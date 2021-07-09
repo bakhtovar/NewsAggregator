@@ -61,6 +61,8 @@ class CategoryVC: UIViewController  {
                         self.title = "Results for \(self.labelText ?? "")"
                     }
                 }
+             
+                
             }
         }
     }
@@ -87,9 +89,16 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
         } else {
         let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! ArticleCell
         if let article = articles?.articles[indexPath.row] {
+    
+            if article.urlToImage == nil {
+                cell.imageIcon.isHidden = true
+                cell.imageWidth.constant = 0
+            }
+            
             cell.titleLabel.text = article.title
             cell.urlLabel.text = article.source.name
             cell.imageIcon.kf.indicatorType = .activity
+            
             if let image = URL(string: article.urlToImage ?? "") {
                 cell.imageIcon.kf.setImage(with: image, placeholder: nil)
             }

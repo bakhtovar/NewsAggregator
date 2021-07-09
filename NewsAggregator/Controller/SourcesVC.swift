@@ -95,7 +95,7 @@ extension SourcesVC :
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let padding:CGFloat = 20
+        let padding:CGFloat = 13
         let space: CGFloat = 10
         let itemWidth = (collectionView.bounds.width) - (padding * 2) - space
         let getWidth = itemWidth/2

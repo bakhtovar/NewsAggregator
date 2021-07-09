@@ -30,7 +30,7 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
         activityIndicator.isHidden = true
         
         view.addSubview(activityIndicator)
-        
+ 
         guard let request = URL(string: url ?? "https://www.google.com") else {
             return
         }
@@ -42,7 +42,7 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
         super.viewDidLayoutSubviews()
         webView.frame = view.bounds
     }
-    
+
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
@@ -52,5 +52,4 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
             activityIndicator.stopAnimating()
             activityIndicator.isHidden = true
         }
-  
 }
