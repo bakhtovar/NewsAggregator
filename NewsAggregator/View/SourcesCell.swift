@@ -22,11 +22,7 @@ class SourcesCell: UICollectionViewCell {
         super.awakeFromNib()
        
         rombCell.layer.cornerRadius = 9
-        
-        
-   
+
     }
-    
-    
 
 }

@@ -60,7 +60,7 @@ extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
     
     //MARK: - up/down/left/rigt - for each item
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 5)
+        return UIEdgeInsets(top: 7, left: 7, bottom: 0, right: 7)
     }
     
     //MARK: - size of each item in CollectionView

@@ -31,16 +31,12 @@ class APICall {
             url = urlSearch
         }
         
-       
-        print(url)
-        
         print("\(category.pageInt) = page")
         
         if let url = url {
             let task = session.dataTask(with: url) { (data, respone, error) in
                 if error == nil && data != nil {
                     do {
-                        
                         let result = try JSONDecoder().decode(Articles.self, from: data!)
                         completion(result)
                     }
@@ -54,7 +50,6 @@ class APICall {
             
         }
     }
-    
     
     func getSources(completion:  @escaping (_ sources: Sources ) -> Void) {
         
