@@ -9,4 +9,8 @@ target 'NewsAggregator' do
   pod('SkeletonView')
 
   pod 'Kingfisher', '~> 6.0'
+
+  pod 'Firebase/Auth'
+  pod 'Firebase/Core'
+
 end

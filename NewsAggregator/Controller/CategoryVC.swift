@@ -22,8 +22,12 @@ class CategoryVC: UIViewController  {
     var sourceName: String?
     var catPass: PassUrl!
     var total = 4
+    
+    var refresh = UIRefreshControl()
 
     @IBOutlet weak var myTableView: UITableView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,10 @@ class CategoryVC: UIViewController  {
         } else {
             self.title = sourceName
         }
+        
+        refresh.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        myTableView?.addSubview(refresh)
         
         //MARK: - using skeleton library
         myTableView.isSkeletonable = true
@@ -66,7 +74,22 @@ class CategoryVC: UIViewController  {
             }
         }
     }
+
+    @objc func refreshData (refreshControl: UIRefreshControl) {
+        
+        catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)
+        
+        APICall.shared.fetchData(category: catPass) { (response) in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.articles = response
+                self.myTableView.reloadData()
+                self.refresh.endRefreshing()
+                print(response)
+            }
+        }
+    }
 }
+
 extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
