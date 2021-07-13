@@ -6,17 +6,34 @@
 //
 
 import UIKit
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window : UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        FirebaseApp.configure()
+        
+//        if Auth.auth().currentUser == nil {
+//            self.show()
+//        }
+    
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user == nil {
+                self.show()
+                print("not logined")
+            }
+        }
         return true
     }
-
+    func show() {
+        let storyobard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyobard.instantiateViewController(identifier: "signin") as! SignInVC
+        self.window?.rootViewController?.present(vc, animated: true, completion: nil)
+        
+    }
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

@@ -28,7 +28,7 @@ extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
     func configureNavbarAndSearchbar() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.title = "News by Category"
-        self.navigationController!.tabBarItem.title = "Categories"
+        self.navigationController?.tabBarItem.title = "Categories"
         searchBar.delegate = self
         searchBar.placeholder = "Search for news"
         hideKeyboard()
