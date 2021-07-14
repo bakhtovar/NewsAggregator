@@ -11,7 +11,8 @@ import Firebase
 //import IQKeyboardManager
 
 class SignInVC: UIViewController, UITextFieldDelegate {
-
+    
+    //var window : UIWindow?
     @IBOutlet weak var signInLabel: UILabel!
     @IBOutlet weak var emailText: UILabel!
     @IBOutlet weak var passwordText: UILabel!
@@ -20,18 +21,20 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginText: UIButton!
     @IBOutlet weak var signupText: UIButton!
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         loginText.layer.cornerRadius = 20
         signupText.layer.cornerRadius = 5
         navigationItem.hidesBackButton = true
-//        emailValue.delegate = self
-//        passwordValue.delegate = self
+        emailValue.delegate = self
+        passwordValue.delegate = self
+        
+   
         
     }
     
-
     @IBAction func loginButton(_ sender: UIButton) {
-        
         signIn()
     }
     
@@ -44,19 +47,19 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     
     func signIn() {
         if let password = passwordValue.text, let email = emailValue.text{
-        
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
             
-            if let e = error {
-                print(e)
-            } else {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(identifier: "main")
-                vc.modalPresentationStyle = .overFullScreen
-                self!.present(vc, animated: true)
+            Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                
+                if let e = error {
+                    print(e)
+                } else {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(identifier: "main")
+                    vc.modalPresentationStyle = .overFullScreen
+                    self!.present(vc, animated: true)
+                }
+                
             }
-            
-        }
         }
     }
     
