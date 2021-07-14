@@ -21,7 +21,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        registerText.layer.cornerRadius = 20
+        registerText.layer.cornerRadius = 15
 //        nameValue.delegate = self
 //        emailValue.delegate = self
 //        passwordValue.delegate = self

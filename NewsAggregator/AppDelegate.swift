@@ -15,21 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-//        print("hhhh")
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let initialViewController = storyboard.instantiateViewController(withIdentifier: "main")
-//        window?.rootViewController = initialViewController
-//        window?.makeKeyAndVisible()
-//        window?.backgroundColor = .red
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(identifier: "main")
-                self.window?.rootViewController?.present(vc, animated: true, completion: nil)
+                let vc = storyboard.instantiateViewController(identifier: "categoriesVC") as! CategoriesVC
+                self.window?.rootViewController = vc
                 self.window?.makeKeyAndVisible()
+                print(self.window)
             }
         }
         return true
