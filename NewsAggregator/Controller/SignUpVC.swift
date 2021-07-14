@@ -52,10 +52,17 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                 if let e = error {
                     print(e.localizedDescription)
                 } else {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewController(identifier: "main")
-                    vc.modalPresentationStyle = .overFullScreen
-                    self.present(vc, animated: true)
+                    if let res = authResult {
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewController(identifier: "main")
+                        vc.modalPresentationStyle = .overFullScreen
+                        self.present(vc, animated: true)
+                        
+                        let ref  = Database.database().reference().child("users")
+                        ref.child(res.user.uid).updateChildValues(["name" : name ?? "", "email": email ?? ""])
+                        
+                    }
+                  
                   
                 }
              }

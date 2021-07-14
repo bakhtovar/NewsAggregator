@@ -8,6 +8,8 @@
 import UIKit
 import Firebase
 
+//import IQKeyboardManager
+
 class SignInVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var signInLabel: UILabel!

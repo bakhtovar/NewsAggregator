@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyobard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyobard.instantiateViewController(identifier: "signin") as! SignInVC
         self.window?.rootViewController?.present(vc, animated: true, completion: nil)
+        self.window?.makeKeyAndVisible()
         
     }
     // MARK: UISceneSession Lifecycle
