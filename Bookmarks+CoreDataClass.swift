@@ -1,6 +1,6 @@
 //
 //  Bookmarks+CoreDataClass.swift
-//  
+//  NewsAggregator
 //
 //  Created by Bakhtovar Umarov on 15/07/21.
 //
