@@ -10,9 +10,9 @@ import WebKit
 
 class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
     var url : String? = nil
-    let webView = WKWebView()
-    
     var activityIndicator = UIActivityIndicatorView()
+    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var bookmarkButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         
@@ -22,7 +22,11 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
         webView.uiDelegate = self
 
         navigationController?.navigationBar.prefersLargeTitles = false
+
         view.addSubview(webView)
+        
+        let image = UIImage(named: "bookmark") as UIImage?
+       //bookmarkButton.setBackgroundImage(image, for: .normal, barMetrics: .default)
         
         activityIndicator.color = .red
         activityIndicator.center = self.view.center
@@ -36,6 +40,12 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
         }
     
         webView.load(URLRequest(url: request))
+    }
+    
+    @IBAction func buttonClicked(_ sender: Any) {
+        
+        
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -52,4 +62,6 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
             activityIndicator.stopAnimating()
             activityIndicator.isHidden = true
         }
+    
+    
 }

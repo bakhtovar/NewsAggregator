@@ -75,7 +75,7 @@ class AccountVC: UIViewController {
         }
         
         if let storyboard = self.storyboard {
-            let vc = storyboard.instantiateViewController(withIdentifier: "signin") as! SignInVC
+            let vc = storyboard.instantiateViewController(withIdentifier: "SignInVC") as! SignInVC
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
