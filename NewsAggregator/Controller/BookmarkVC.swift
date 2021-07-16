@@ -86,6 +86,15 @@ extension BookmarkVC: UITableViewDelegate, UITableViewDataSource {
         return 100
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "WebviewVC") as! WebviewVC
+        vc.url = bookmarks[indexPath.row].urlLink
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 
