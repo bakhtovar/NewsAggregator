@@ -10,7 +10,8 @@ import Firebase
 
 class SignUpVC: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var signupLabel: UILabel!
+   
+    @IBOutlet weak var signupLabel: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!

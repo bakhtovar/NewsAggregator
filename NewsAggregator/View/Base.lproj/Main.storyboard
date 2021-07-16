@@ -169,7 +169,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="c94-mI-4vD">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="bookmark" catalog="system" id="3y6-kg-3to"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="bookmark" catalog="system" id="3y6-kg-3to">
+                            <connections>
+                                <action selector="buttonClicked:" destination="lPX-89-cug" id="kJJ-kB-MGb"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="webView" destination="gJZ-hE-9ji" id="z6W-H1-5GR"/>
@@ -502,6 +506,7 @@
                         <outlet property="passwordLabel" destination="rZO-72-iNr" id="S74-fz-YeE"/>
                         <outlet property="passwordValue" destination="iRC-2U-xhb" id="eyD-DZ-tCB"/>
                         <outlet property="registerText" destination="DmO-a4-OSp" id="4In-hf-bqc"/>
+                        <outlet property="signupLabel" destination="DmO-a4-OSp" id="Xqa-jR-QSA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hUk-Xe-nCV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -569,7 +574,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="y1g-ft-4uk"/>
                     <connections>
-                        <outlet property="table" destination="Zt6-bw-g6U" id="KeH-CZ-pAr"/>
+                        <outlet property="table" destination="Zt6-bw-g6U" id="kr2-2R-v5U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3cE-xA-3zS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

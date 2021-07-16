@@ -7,17 +7,26 @@
 
 import UIKit
 import WebKit
+import CoreData
 
 class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
+    
+    var articles: Articles?
     var url : String? = nil
+    var titleName: String? = nil
+    var sourceName : String? = nil
+    var urlImage : String? = nil
     var activityIndicator = UIActivityIndicatorView()
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var bookmarkButton: UIBarButtonItem!
     
+    var bookmarks = [Bookmarks]()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        print(NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).last! as String)
+        print("- - - - - - - - - - - ")
         webView.navigationDelegate = self
         webView.uiDelegate = self
 
@@ -40,11 +49,32 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
         }
     
         webView.load(URLRequest(url: request))
+    
+        
+//        var allData = [NSObject]()
+//
+//        let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
+//     //   let fetchRequest = NSFetchRequest<Bookmarks>(entityName: "Bookmarks")
+//       // let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Users");
+//        do {
+//            let bookmarks = try PersistenceService.persistentContainer.viewContext.fetch(fetchRequest)
+//            allData = bookmarks as [NSManagedObject]
+//            self.bookmarks = bookmarks
+//        } catch {}
+//
+//
+//        print(bookmarks)
     }
     
     @IBAction func buttonClicked(_ sender: Any) {
         
-        
+        let bookmark = Bookmarks(context: PersistenceService.context)
+        bookmark.urlToImage = urlImage
+        bookmark.source = sourceName
+        bookmark.tittleName = titleName
+        bookmark.urlLink = url
+        PersistenceService.saveContext()
+        bookmarks.append(bookmark)
         
     }
     

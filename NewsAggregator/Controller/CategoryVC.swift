@@ -84,7 +84,7 @@ class CategoryVC: UIViewController  {
                 self.articles = response
                 self.myTableView.reloadData()
                 self.refresh.endRefreshing()
-                print(response)
+              
             }
         }
     }
@@ -153,6 +153,10 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "WebviewVC") as! WebviewVC
         vc.url = articles?.articles[indexPath.row].url
+        vc.sourceName = articles?.articles[indexPath.row].source.name?.uppercased()
+        vc.titleName = articles?.articles[indexPath.row].title
+        vc.urlImage = articles?.articles[indexPath.row].urlToImage
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

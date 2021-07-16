@@ -31,8 +31,6 @@ class APICall {
             url = urlSearch
         }
         
-        print("\(category.pageInt) = page")
-        
         if let url = url {
             let task = session.dataTask(with: url) { (data, respone, error) in
                 if error == nil && data != nil {

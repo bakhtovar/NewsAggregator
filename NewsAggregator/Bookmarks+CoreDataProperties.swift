@@ -15,8 +15,7 @@ extension Bookmarks {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Bookmarks> {
         return NSFetchRequest<Bookmarks>(entityName: "Bookmarks")
     }
-
-    @NSManaged public var descriptionName: String?
+    
     @NSManaged public var tittleName: String?
     @NSManaged public var urlLink: String?
     @NSManaged public var urlToImage: String?
