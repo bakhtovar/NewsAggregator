@@ -17,7 +17,15 @@ class BookmarkVC: UIViewController {
     var sourceName: String?
     var bookmarks = [Bookmarks]()
     
+    
+    
     @IBOutlet weak var table: UITableView!
+    
+    
+    
+    let context = (UIApplication.shared.delegate as!
+                    AppDelegate).persistentContainer.viewContext
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Bookmarks"
@@ -26,8 +34,8 @@ class BookmarkVC: UIViewController {
         
         table.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "articleCell")
     
-        print(bookmarks)
-       
+      
+    
     }
     
 
@@ -41,7 +49,7 @@ class BookmarkVC: UIViewController {
      //   let fetchRequest = NSFetchRequest<Bookmarks>(entityName: "Bookmarks")
        // let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Users");
         do {
-            let bookmarks = try PersistenceService.persistentContainer.viewContext.fetch(fetchRequest)
+            let bookmarks = try context.fetch(fetchRequest)
             allData = bookmarks as [NSManagedObject]
             self.bookmarks = bookmarks
             table.reloadData()
@@ -71,13 +79,14 @@ extension BookmarkVC: UITableViewDelegate, UITableViewDataSource {
             cell.imageWidth.constant = 0
         }
         
-        cell.titleLabel.text = article.tittleName
+        cell.titleLabel.text = article.titleName
         cell.urlLabel.text = article.source
         cell.imageIcon.kf.indicatorType = .activity
         
         if let image = URL(string: article.urlToImage ?? "") {
             cell.imageIcon.kf.setImage(with: image, placeholder: nil)
         }
+     
       
         return cell
     }
@@ -95,6 +104,26 @@ extension BookmarkVC: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
+        if(editingStyle == UITableViewCell.EditingStyle.delete){
+
+//        let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler ) in
+            
+            let personToRemove = self.bookmarks[indexPath.row]
+            
+            self.context.delete(personToRemove)
+            
+            do {
+                try self.context.save()
+            } catch {
+                
+            }
+            self.fetchData()
+            
+        }
+        //}
+//        return UISwipeActionsConfiguration(actions: [action])
+    }
 }
 
 

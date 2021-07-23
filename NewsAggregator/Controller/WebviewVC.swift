@@ -12,7 +12,7 @@ import CoreData
 class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     var articles: Articles?
-    var url : String? = nil
+    var url: String? = nil
     var titleName: String? = nil
     var sourceName : String? = nil
     var urlImage : String? = nil
@@ -22,7 +22,13 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     var bookmarks = [Bookmarks]()
     
+    let context = (UIApplication.shared.delegate as!
+                    AppDelegate).persistentContainer.viewContext
+    
+    let saveContent = (UIApplication.shared.delegate as!
+                AppDelegate).saveContext()
     override func viewDidLoad() {
+    
         
         super.viewDidLoad()
         print(NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).last! as String)
@@ -34,7 +40,7 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
 
         view.addSubview(webView)
         
-        let image = UIImage(named: "bookmark") as UIImage?
+      //  let image = UIImage(named: "bookmark") as UIImage?
        //bookmarkButton.setBackgroundImage(image, for: .normal, barMetrics: .default)
         
         activityIndicator.color = .red
@@ -66,18 +72,28 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
 //        print(bookmarks)
     }
     
-    @IBAction func buttonClicked(_ sender: Any) {
+    @IBAction func buttonClicked(_ sender: UIBarButtonItem) {
         
-        let bookmark = Bookmarks(context: PersistenceService.context)
+        let bookmark = Bookmarks(context: context)
+        bookmarkButton.setBackgroundImage(UIImage(named: "avatar"), for: .normal, barMetrics: .default)
         bookmark.urlToImage = urlImage
         bookmark.source = sourceName
-        bookmark.tittleName = titleName
+        bookmark.titleName = titleName
         bookmark.urlLink = url
-        PersistenceService.saveContext()
         bookmarks.append(bookmark)
+      
+        do {
+            try context.save()
+        } catch {
+            
+        }
+        
+        
+        //PersistenceService.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
     }
     
+   
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         webView.frame = view.bounds

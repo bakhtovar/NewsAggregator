@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Bookmarks" representedClassName="Bookmarks" syncable="YES">
         <attribute name="source" optional="YES" attributeType="String"/>
-        <attribute name="tittleName" optional="YES" attributeType="String"/>
+        <attribute name="titleName" optional="YES" attributeType="String"/>
         <attribute name="urlLink" optional="YES" attributeType="String"/>
         <attribute name="urlToImage" optional="YES" attributeType="String"/>
     </entity>

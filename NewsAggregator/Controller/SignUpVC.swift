@@ -63,14 +63,16 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                         ref.child(res.user.uid).updateChildValues(["name" : name ?? "", "email": email ?? ""])
                         
                     }
-                  
-                  
                 }
              }
          }
          else {
              showAlert()
          }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 
 }
