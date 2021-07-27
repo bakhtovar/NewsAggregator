@@ -10,6 +10,8 @@
 		BE298EC4FB44E324A45095CA /* Pods_NewsAggregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF78A9D8C4EE78EED0C1B886 /* Pods_NewsAggregator.framework */; };
 		D308E97226A9798100A6DD84 /* Bookmarks+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D308E97026A9798100A6DD84 /* Bookmarks+CoreDataClass.swift */; };
 		D308E97326A9798100A6DD84 /* Bookmarks+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D308E97126A9798100A6DD84 /* Bookmarks+CoreDataProperties.swift */; };
+		D309657926AFFF3B001F9A6B /* ResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309657826AFFF3B001F9A6B /* ResetVC.swift */; };
+		D309657C26B003E0001F9A6B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309657B26B003E0001F9A6B /* Service.swift */; };
 		D30AF072269CD2F700992348 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30AF071269CD2F700992348 /* SignInVC.swift */; };
 		D30AF076269CD51500992348 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30AF075269CD51500992348 /* SignUpVC.swift */; };
 		D31728A8268A3A7B004E084D /* SourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31728A7268A3A7B004E084D /* SourceModel.swift */; };
@@ -48,6 +50,8 @@
 		BF78A9D8C4EE78EED0C1B886 /* Pods_NewsAggregator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewsAggregator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D308E97026A9798100A6DD84 /* Bookmarks+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bookmarks+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		D308E97126A9798100A6DD84 /* Bookmarks+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bookmarks+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		D309657826AFFF3B001F9A6B /* ResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetVC.swift; sourceTree = "<group>"; };
+		D309657B26B003E0001F9A6B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = ../../../Service.swift; sourceTree = "<group>"; };
 		D30AF071269CD2F700992348 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		D30AF075269CD51500992348 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		D31728A7268A3A7B004E084D /* SourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceModel.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 				D3B36125267B2BEA002DB248 /* Assets.xcassets */,
 				D3B36127267B2BEA002DB248 /* LaunchScreen.storyboard */,
 				D3B3612A267B2BEA002DB248 /* Info.plist */,
+				D309657B26B003E0001F9A6B /* Service.swift */,
 			);
 			path = NewsAggregator;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 				D30AF075269CD51500992348 /* SignUpVC.swift */,
 				D381D420269DFFA100695941 /* AccountVC.swift */,
 				D365D98B269FFD1300FAC1A1 /* BookmarkVC.swift */,
+				D309657826AFFF3B001F9A6B /* ResetVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -317,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3B36121267B2BE1002DB248 /* CategoriesVC.swift in Sources */,
+				D309657C26B003E0001F9A6B /* Service.swift in Sources */,
 				D3B3611D267B2BE1002DB248 /* AppDelegate.swift in Sources */,
 				D31728B8268AFA37004E084D /* SourceViewModel.swift in Sources */,
 				D3D8703A2685992300F3E0C7 /* SourcesCell.swift in Sources */,
@@ -336,6 +343,7 @@
 				D3352EFF267BD7C4004103DC /* ArticleModel.swift in Sources */,
 				D3352F02267BD984004103DC /* APICall.swift in Sources */,
 				D365D960269F69DC00FAC1A1 /* NewsAggregator.xcdatamodeld in Sources */,
+				D309657926AFFF3B001F9A6B /* ResetVC.swift in Sources */,
 				D381D421269DFFA100695941 /* AccountVC.swift in Sources */,
 				D31728A8268A3A7B004E084D /* SourceModel.swift in Sources */,
 				D3B36141267B2F99002DB248 /* CategoryCell.swift in Sources */,

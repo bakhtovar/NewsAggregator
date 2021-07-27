@@ -9,8 +9,8 @@ import UIKit
 import Firebase
 
 class SignUpVC: UIViewController, UITextFieldDelegate {
-
-   
+    
+    
     @IBOutlet weak var signupLabel: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
@@ -21,11 +21,28 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var registerText: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         registerText.layer.cornerRadius = 15
         nameValue.delegate = self
         emailValue.delegate = self
         passwordValue.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        self.hideKeyboardWhenTappedAround()
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height - 50
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
     
     @IBAction func registerButton(_ sender: Any) {
@@ -40,14 +57,16 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     func signUp (){
         
-         let name = nameValue.text
-         let password = passwordValue.text
-         let email = emailValue.text
-         
+        let name = nameValue.text
+        let password = passwordValue.text
+        let email = emailValue.text
+        
         if (!name!.isEmpty && !password!.isEmpty && !email!.isEmpty) {
-             Auth.auth().createUser(withEmail: email ?? "", password: password ?? "") { (authResult, error) in
+            Auth.auth().createUser(withEmail: email ?? "", password: password ?? "") { (authResult, error) in
                 if let e = error {
                     print(e.localizedDescription)
+                    let alert = Service.createAlertController(title: "Error", message: e.localizedDescription)
+                    self.present(alert, animated: true,completion: nil)
                 } else {
                     if let res = authResult {
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -60,11 +79,11 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                         
                     }
                 }
-             }
-         }
-         else {
-             showAlert()
-         }
+            }
+        }
+        else {
+            showAlert()
+        }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)

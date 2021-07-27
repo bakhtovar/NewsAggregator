@@ -28,12 +28,30 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         navigationItem.hidesBackButton = true
         emailValue.delegate = self
         passwordValue.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        self.hideKeyboardWhenTappedAround()
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height - 50
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
     
     @IBAction func loginButton(_ sender: UIButton) {
         signIn()
     }
+   
     
     func showAlert() {
         let alert = UIAlertController(title: "Error", message: "Fill out the fields.", preferredStyle: .alert)
@@ -48,6 +66,8 @@ class SignInVC: UIViewController, UITextFieldDelegate {
                 
                 if let e = error {
                     print(e)
+                    let alert = Service.createAlertController(title: "Error", message: e.localizedDescription)
+                    self!.present(alert, animated: true,completion: nil)
                 } else {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(identifier: "main")
