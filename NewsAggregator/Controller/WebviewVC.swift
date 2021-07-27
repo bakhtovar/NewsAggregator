@@ -10,7 +10,6 @@ import WebKit
 import CoreData
 
 class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
-    
     var articles: Articles?
     var url: String? = nil
     var titleName: String? = nil
@@ -31,11 +30,9 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
         fetchData()
         
         super.viewDidLoad()
+        
         webView.navigationDelegate = self
         webView.uiDelegate = self
-       
-        
-  
         navigationController?.navigationBar.prefersLargeTitles = false
         
         view.addSubview(webView)
@@ -57,10 +54,12 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
     func fetchData() {
         
         let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "titleName == %@", titleName!)
         
-        if (fetchRequest.predicate == NSPredicate(format: "titleName == %@", titleName ?? "" )) {
+        if (try? context.fetch(fetchRequest))?.first != nil {
             bookmarkButton.image = UIImage(systemName: "bookmark.fill")
         }
+        
         do {
             let bookmarks = try context.fetch(fetchRequest)
             self.bookmarks = bookmarks
@@ -70,45 +69,37 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     
     @IBAction func buttonClicked(_ sender: UIBarButtonItem) {
+        
         let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
-        let bookmark = Bookmarks(context: context)
-     
-        if bookmarkButton.image == UIImage(systemName: "bookmark")  {
+        fetchRequest.predicate = NSPredicate(format: "titleName == %@", titleName!)
+        
+        if (try? context.fetch(fetchRequest))?.first == nil {
             bookmarkButton.image = UIImage(systemName: "bookmark.fill")
+            let bookmark = Bookmarks(context: context)
             bookmark.urlToImage = urlImage
             bookmark.source = sourceName
             bookmark.titleName = titleName
             bookmark.urlLink = url
-            print(url)
-            print("ffff")
             bookmarks.append(bookmark)
-    
-        } else {
-            bookmarkButton.image = UIImage(systemName: "bookmark")
-          
-            if fetchRequest.predicate == NSPredicate.init(format: "titleName == %@", titleName!){
-                print(bookmark)
-                do {
-                    let objects = try context.fetch(fetchRequest)
-                    for object in objects {
-                        context.delete(object)
-                    }
-                    try context.save()
-                } catch _ {
-                    // error handling
-                }
-                
+            
+            do {
+                try context.save()
+            } catch {
+                print(error)
             }
-           
+            
+        } else {
+            do {
+                bookmarkButton.image = UIImage(systemName: "bookmark")
+                let objects = try context.fetch(fetchRequest)
+                for object in objects {
+                    context.delete(object)
+                }
+                try context.save()
+            } catch _ {
+                print("error")
+            }
         }
-        
-        do {
-            try context.save()
-        } catch {
-
-        }
-//        print(fetchRequest.predicate == NSPredicate(format: "titleName == %@", titleName!))
-//
     }
     
     override func viewDidLayoutSubviews() {
@@ -125,6 +116,4 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
     }
-    
-    
 }

@@ -51,7 +51,6 @@ class BookmarkVC: UIViewController {
 
 extension BookmarkVC: UITableViewDelegate,  UITableViewDataSource {
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bookmarks.count
     }
@@ -60,8 +59,6 @@ extension BookmarkVC: UITableViewDelegate,  UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! ArticleCell
         
         let article = bookmarks[indexPath.row]
-    
-        
         if article.urlToImage == nil {
             cell.imageIcon.isHidden = true
             cell.imageWidth.constant = 0
@@ -90,17 +87,12 @@ extension BookmarkVC: UITableViewDelegate,  UITableViewDataSource {
         vc.titleName = bookmarks[indexPath.row].titleName
         vc.urlImage = bookmarks[indexPath.row].urlToImage
         vc.sourceName = bookmarks[indexPath.row].source
-        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
         if(editingStyle == UITableViewCell.EditingStyle.delete){
-
-//        let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler ) in
-            
             let personToRemove = self.bookmarks[indexPath.row]
-            
             self.context.delete(personToRemove)
             
             do {
@@ -111,8 +103,6 @@ extension BookmarkVC: UITableViewDelegate,  UITableViewDataSource {
             self.fetchData()
             
         }
-        //}
-//        return UISwipeActionsConfiguration(actions: [action])
     }
 }
 

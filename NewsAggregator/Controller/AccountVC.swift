@@ -58,13 +58,10 @@ class AccountVC: UIViewController {
                 self.userName.alpha = 1
             }
         }
-        
-        
     }
 
     
     @IBAction func logOutPressed(_ sender: Any) {
-
         tabBarController?.tabBar.isHidden = true
         let firebaseAuth = Auth.auth()
         do {
@@ -78,7 +75,5 @@ class AccountVC: UIViewController {
             let vc = storyboard.instantiateViewController(withIdentifier: "SignInVC") as! SignInVC
             self.navigationController?.pushViewController(vc, animated: true)
         }
-    }
-    
-    
+    }    
 }

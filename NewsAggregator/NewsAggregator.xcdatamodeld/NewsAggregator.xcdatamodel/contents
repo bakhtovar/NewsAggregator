@@ -5,6 +5,11 @@
         <attribute name="titleName" optional="YES" attributeType="String"/>
         <attribute name="urlLink" optional="YES" attributeType="String"/>
         <attribute name="urlToImage" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="titleName"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
         <element name="Bookmarks" positionX="-63" positionY="-18" width="128" height="89"/>

@@ -10,7 +10,6 @@ import UIKit
 import SkeletonView
 
 class SourcesVC: UIViewController {
-    
     @IBOutlet weak var sourcesSearch: UISearchBar!
     @IBOutlet weak var sourcesCollectionView: UICollectionView!
     
@@ -18,7 +17,6 @@ class SourcesVC: UIViewController {
     var category = CategoriesBrain()
     var sources: Sources?
     var filteredData: Sources?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,7 +126,7 @@ extension SourcesVC: UISearchBarDelegate {
         sources?.sources = (filteredData?.sources.filter({ source -> Bool in
             (source.name?.lowercased().contains(searchText.lowercased()))!
         }))!
-         sourcesCollectionView.reloadData()
+        sourcesCollectionView.reloadData()
         
     }
 }

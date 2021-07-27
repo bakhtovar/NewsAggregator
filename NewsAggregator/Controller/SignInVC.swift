@@ -8,11 +8,10 @@
 import UIKit
 import Firebase
 
-//import IQKeyboardManager
+
 
 class SignInVC: UIViewController, UITextFieldDelegate {
     
-    //var window : UIWindow?
     @IBOutlet weak var signInLabel: UILabel!
     @IBOutlet weak var emailText: UILabel!
     @IBOutlet weak var passwordText: UILabel!
@@ -30,14 +29,11 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         emailValue.delegate = self
         passwordValue.delegate = self
         
-   
-        
     }
     
     @IBAction func loginButton(_ sender: UIButton) {
         signIn()
     }
-    
     
     func showAlert() {
         let alert = UIAlertController(title: "Error", message: "Fill out the fields.", preferredStyle: .alert)

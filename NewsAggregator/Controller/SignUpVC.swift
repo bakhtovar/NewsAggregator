@@ -23,18 +23,14 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         registerText.layer.cornerRadius = 15
-//        nameValue.delegate = self
-//        emailValue.delegate = self
-//        passwordValue.delegate = self
+        nameValue.delegate = self
+        emailValue.delegate = self
+        passwordValue.delegate = self
     }
     
     @IBAction func registerButton(_ sender: Any) {
-    
         signUp()
-        
     }
-    
-   
     
     func showAlert() {
         let alert = UIAlertController(title: "Error", message: "Fill out the fields.", preferredStyle: .alert)
@@ -74,6 +70,5 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         return false
     }
-
 }
 

@@ -9,14 +9,12 @@ import UIKit
 
 class CategoriesVC: UIViewController {
     
-    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var myCollectionView: UICollectionView!
     
     var category = CategoriesBrain()
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         configureCollectionView()
         configureNavbarAndSearchbar()
@@ -50,7 +48,6 @@ extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
     //MARK: - draw ans assign properties
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
-        
         let categoryName = category.cat[indexPath.row]
         cell.backgroundColor = categoryName.background
         cell.categoryLabel.text = categoryName.nameLabel
@@ -75,7 +72,6 @@ extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let tappedCategory = category.cat[indexPath.row]
-
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "CategoryVC") as! CategoryVC
         
@@ -91,9 +87,8 @@ extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
 extension CategoriesVC: UISearchBarDelegate {
     
     func hideKeyboard() {
-       //MARK: - hides keyboard
+        //MARK: - hides keyboard
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-       
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
     }

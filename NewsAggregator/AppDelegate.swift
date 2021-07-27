@@ -41,13 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var persistentContainer: NSPersistentContainer = {
             let container = NSPersistentContainer(name: "NewsAggregator")
             container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-                //container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
                 if let error = error as NSError? {
                     fatalError("Unresolved error \(error), \(error.userInfo)")
                 }
             })
-        container.viewContext.automaticallyMergesChangesFromParent = true
-        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        
             return container
         }()
     
@@ -56,11 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func saveContext () {
         let context = persistentContainer.viewContext
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         if context.hasChanges {
             do {
                 try context.save()
-               // context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-                
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
