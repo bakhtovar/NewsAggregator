@@ -24,24 +24,21 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     let context = (UIApplication.shared.delegate as!
                     AppDelegate).persistentContainer.viewContext
-    
-    let saveContent = (UIApplication.shared.delegate as!
-                AppDelegate).saveContext()
+    let saveContent: () = (UIApplication.shared.delegate as!
+                            AppDelegate).saveContext()
     override func viewDidLoad() {
-    
+        
+        fetchData()
         
         super.viewDidLoad()
-        print(NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).last! as String)
-        print("- - - - - - - - - - - ")
         webView.navigationDelegate = self
         webView.uiDelegate = self
-
-        navigationController?.navigationBar.prefersLargeTitles = false
-
-        view.addSubview(webView)
+       
         
-      //  let image = UIImage(named: "bookmark") as UIImage?
-       //bookmarkButton.setBackgroundImage(image, for: .normal, barMetrics: .default)
+  
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
+        view.addSubview(webView)
         
         activityIndicator.color = .red
         activityIndicator.center = self.view.center
@@ -49,65 +46,85 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
         activityIndicator.isHidden = true
         
         view.addSubview(activityIndicator)
- 
-        guard let request = URL(string: url ?? "https://www.google.com") else {
+        
+        guard let request = URL(string: url ?? "text") else {
             return
         }
-    
-        webView.load(URLRequest(url: request))
-    
         
-//        var allData = [NSObject]()
-//
-//        let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
-//     //   let fetchRequest = NSFetchRequest<Bookmarks>(entityName: "Bookmarks")
-//       // let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Users");
-//        do {
-//            let bookmarks = try PersistenceService.persistentContainer.viewContext.fetch(fetchRequest)
-//            allData = bookmarks as [NSManagedObject]
-//            self.bookmarks = bookmarks
-//        } catch {}
-//
-//
-//        print(bookmarks)
+        webView.load(URLRequest(url: request))
+        
+    }
+    func fetchData() {
+        
+        let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
+        
+        if (fetchRequest.predicate == NSPredicate(format: "titleName == %@", titleName ?? "" )) {
+            bookmarkButton.image = UIImage(systemName: "bookmark.fill")
+        }
+        do {
+            let bookmarks = try context.fetch(fetchRequest)
+            self.bookmarks = bookmarks
+            
+        } catch {}
     }
     
+    
     @IBAction func buttonClicked(_ sender: UIBarButtonItem) {
-        
+        let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
         let bookmark = Bookmarks(context: context)
-        bookmarkButton.setBackgroundImage(UIImage(named: "avatar"), for: .normal, barMetrics: .default)
-        bookmark.urlToImage = urlImage
-        bookmark.source = sourceName
-        bookmark.titleName = titleName
-        bookmark.urlLink = url
-        bookmarks.append(bookmark)
-      
+     
+        if bookmarkButton.image == UIImage(systemName: "bookmark")  {
+            bookmarkButton.image = UIImage(systemName: "bookmark.fill")
+            bookmark.urlToImage = urlImage
+            bookmark.source = sourceName
+            bookmark.titleName = titleName
+            bookmark.urlLink = url
+            print(url)
+            print("ffff")
+            bookmarks.append(bookmark)
+    
+        } else {
+            bookmarkButton.image = UIImage(systemName: "bookmark")
+          
+            if fetchRequest.predicate == NSPredicate.init(format: "titleName == %@", titleName!){
+                print(bookmark)
+                do {
+                    let objects = try context.fetch(fetchRequest)
+                    for object in objects {
+                        context.delete(object)
+                    }
+                    try context.save()
+                } catch _ {
+                    // error handling
+                }
+                
+            }
+           
+        }
+        
         do {
             try context.save()
         } catch {
-            
+
         }
-        
-        
-        //PersistenceService.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        
+//        print(fetchRequest.predicate == NSPredicate(format: "titleName == %@", titleName!))
+//
     }
     
-   
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         webView.frame = view.bounds
     }
-
+    
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-            activityIndicator.isHidden = false
-            activityIndicator.startAnimating()
-        }
-
-        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            activityIndicator.stopAnimating()
-            activityIndicator.isHidden = true
-        }
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+    }
     
     
 }

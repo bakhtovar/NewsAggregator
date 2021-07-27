@@ -39,22 +39,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7EF3F04F-2C43-431D-82F4-D3CFC07305EE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NewsAggregator/Controller/WebviewVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "WebviewVC"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "41CCA011-E69C-44A7-AAEB-5D0CD5B0BB28"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -65,38 +49,6 @@
             startingLineNumber = "32"
             endingLineNumber = "32"
             landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2ECC188B-EFCD-42C0-82B8-8E62F840E347"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NewsAggregator/Controller/WebviewVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4E3B0421-3FE1-45BC-A7C5-11E7A14B62E4"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NewsAggregator/Controller/WebviewVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "buttonClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -114,6 +66,146 @@
             endingLineNumber = "4"
             landmarkName = "unknown"
             landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A07C5B87-FF59-474A-9DA4-3DAE489166B2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NewsAggregator/Controller/BookmarkVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7E396E28-40CE-4516-BAF5-A239CBB31404"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NewsAggregator/Controller/BookmarkVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "9"
+            endingLineNumber = "9"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E9928040-6A8F-4C29-9B36-692711646121"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NewsAggregator/Controller/BookmarkVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "BookmarkVC"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "E9928040-6A8F-4C29-9B36-692711646121 - e79c7874b81fb976"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsAggregator.BookmarkVC.labelText.getter : Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "NewsAggregator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bakhtovar/Coding/swift/NewsAggregator/NewsAggregator/Controller/BookmarkVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "139">
+               </Location>
+               <Location
+                  uuid = "E9928040-6A8F-4C29-9B36-692711646121 - 29c6f8ba9905814a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsAggregator.BookmarkVC.labelText.setter : Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "NewsAggregator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bakhtovar/Coding/swift/NewsAggregator/NewsAggregator/Controller/BookmarkVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "174">
+               </Location>
+               <Location
+                  uuid = "E9928040-6A8F-4C29-9B36-692711646121 - d20e8dac74ed509"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsAggregator.BookmarkVC.labelText.modify : Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "NewsAggregator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bakhtovar/Coding/swift/NewsAggregator/NewsAggregator/Controller/BookmarkVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "18">
+               </Location>
+               <Location
+                  uuid = "E9928040-6A8F-4C29-9B36-692711646121 - b07c489d5d336749"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsAggregator.BookmarkVC.labelText.modify : Swift.Optional&lt;Swift.String&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "NewsAggregator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bakhtovar/Coding/swift/NewsAggregator/NewsAggregator/Controller/BookmarkVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  uuid = "E9928040-6A8F-4C29-9B36-692711646121 - 623013f3f1ef58ea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsAggregator.BookmarkVC.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; NewsAggregator.BookmarkVC"
+                  moduleName = "NewsAggregator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bakhtovar/Coding/swift/NewsAggregator/NewsAggregator/Controller/BookmarkVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "660">
+               </Location>
+               <Location
+                  uuid = "E9928040-6A8F-4C29-9B36-692711646121 - 98675053b90b3779"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsAggregator.BookmarkVC.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;NewsAggregator.BookmarkVC&gt;"
+                  moduleName = "NewsAggregator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bakhtovar/Coding/swift/NewsAggregator/NewsAggregator/Controller/BookmarkVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "601">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 class BookmarkVC: UIViewController {
-
+    
     var titleName: String?
     var urlString: String?
     var sourceId : String?
@@ -17,11 +17,7 @@ class BookmarkVC: UIViewController {
     var sourceName: String?
     var bookmarks = [Bookmarks]()
     
-    
-    
     @IBOutlet weak var table: UITableView!
-    
-    
     
     let context = (UIApplication.shared.delegate as!
                     AppDelegate).persistentContainer.viewContext
@@ -31,26 +27,16 @@ class BookmarkVC: UIViewController {
         title = "Bookmarks"
         table.delegate = self
         table.dataSource = self
-        
         table.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "articleCell")
-    
-      
-    
+        
     }
-    
-
     
     // MARK: - Navigation
 
     func fetchData() {
-        var allData = [NSObject]()
-        
         let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
-     //   let fetchRequest = NSFetchRequest<Bookmarks>(entityName: "Bookmarks")
-       // let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Users");
         do {
             let bookmarks = try context.fetch(fetchRequest)
-            allData = bookmarks as [NSManagedObject]
             self.bookmarks = bookmarks
             table.reloadData()
         } catch {}
@@ -58,12 +44,12 @@ class BookmarkVC: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-          fetchData()
+            fetchData()
         }
 }
 
 
-extension BookmarkVC: UITableViewDelegate, UITableViewDataSource {
+extension BookmarkVC: UITableViewDelegate,  UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,6 +60,8 @@ extension BookmarkVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! ArticleCell
         
         let article = bookmarks[indexPath.row]
+    
+        
         if article.urlToImage == nil {
             cell.imageIcon.isHidden = true
             cell.imageWidth.constant = 0
@@ -86,8 +74,7 @@ extension BookmarkVC: UITableViewDelegate, UITableViewDataSource {
         if let image = URL(string: article.urlToImage ?? "") {
             cell.imageIcon.kf.setImage(with: image, placeholder: nil)
         }
-     
-      
+       
         return cell
     }
     
@@ -100,6 +87,9 @@ extension BookmarkVC: UITableViewDelegate, UITableViewDataSource {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "WebviewVC") as! WebviewVC
         vc.url = bookmarks[indexPath.row].urlLink
+        vc.titleName = bookmarks[indexPath.row].titleName
+        vc.urlImage = bookmarks[indexPath.row].urlToImage
+        vc.sourceName = bookmarks[indexPath.row].source
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -116,7 +106,7 @@ extension BookmarkVC: UITableViewDelegate, UITableViewDataSource {
             do {
                 try self.context.save()
             } catch {
-                
+
             }
             self.fetchData()
             
