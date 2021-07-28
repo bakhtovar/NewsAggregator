@@ -12,6 +12,7 @@
 		D308E97326A9798100A6DD84 /* Bookmarks+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D308E97126A9798100A6DD84 /* Bookmarks+CoreDataProperties.swift */; };
 		D309657926AFFF3B001F9A6B /* ResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309657826AFFF3B001F9A6B /* ResetVC.swift */; };
 		D309657C26B003E0001F9A6B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309657B26B003E0001F9A6B /* Service.swift */; };
+		D309658426B08FE9001F9A6B /* NumberAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309658326B08FE9001F9A6B /* NumberAuthVC.swift */; };
 		D30AF072269CD2F700992348 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30AF071269CD2F700992348 /* SignInVC.swift */; };
 		D30AF076269CD51500992348 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30AF075269CD51500992348 /* SignUpVC.swift */; };
 		D31728A8268A3A7B004E084D /* SourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31728A7268A3A7B004E084D /* SourceModel.swift */; };
@@ -52,6 +53,7 @@
 		D308E97126A9798100A6DD84 /* Bookmarks+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bookmarks+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		D309657826AFFF3B001F9A6B /* ResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetVC.swift; sourceTree = "<group>"; };
 		D309657B26B003E0001F9A6B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = ../../../Service.swift; sourceTree = "<group>"; };
+		D309658326B08FE9001F9A6B /* NumberAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAuthVC.swift; sourceTree = "<group>"; };
 		D30AF071269CD2F700992348 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		D30AF075269CD51500992348 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		D31728A7268A3A7B004E084D /* SourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceModel.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				D381D420269DFFA100695941 /* AccountVC.swift */,
 				D365D98B269FFD1300FAC1A1 /* BookmarkVC.swift */,
 				D309657826AFFF3B001F9A6B /* ResetVC.swift */,
+				D309658326B08FE9001F9A6B /* NumberAuthVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				D30AF076269CD51500992348 /* SignUpVC.swift in Sources */,
 				D3B36138267B2D9F002DB248 /* SourcesVC.swift in Sources */,
 				D3352F0F267C610C004103DC /* CategoryVC.swift in Sources */,
+				D309658426B08FE9001F9A6B /* NumberAuthVC.swift in Sources */,
 				D365D98C269FFD1300FAC1A1 /* BookmarkVC.swift in Sources */,
 				D3B36145267B397A002DB248 /* CategoryModel.swift in Sources */,
 				D308E97326A9798100A6DD84 /* Bookmarks+CoreDataProperties.swift in Sources */,

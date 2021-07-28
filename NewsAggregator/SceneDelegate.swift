@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(identifier: "main") 
+                let vc = storyboard.instantiateViewController(identifier: "main")
                 self.window!.rootViewController = vc
                 self.window?.makeKeyAndVisible()
                 

@@ -25,7 +25,11 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         
         loginText.layer.cornerRadius = 20
         signupText.layer.cornerRadius = 5
-        navigationItem.hidesBackButton = true
+        
+       print(navigationController)
+        print("ffff")
+        
+//        navigationItem.hidesBackButton = true
         emailValue.delegate = self
         passwordValue.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -52,6 +56,15 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         signIn()
     }
    
+    
+    @IBAction func signUpButton(_ sender: UIButton) {
+//        self.performSegue(withIdentifier: "SignUp", sender: nil)
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "signup") as? SignUpVC
+        self.navigationController?.pushViewController(vc!, animated: true)
+//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "signup") as! SignUpVC
+//        self.show(vc, sender: nil)
+        
+    }
     
     func showAlert() {
         let alert = UIAlertController(title: "Error", message: "Fill out the fields.", preferredStyle: .alert)
