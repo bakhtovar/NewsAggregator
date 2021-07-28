@@ -32,24 +32,8 @@ class SignInVC: UIViewController, UITextFieldDelegate {
 //        navigationItem.hidesBackButton = true
         emailValue.delegate = self
         passwordValue.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        self.hideKeyboardWhenTappedAround()
-    }
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height - 50
-            }
-        }
-    }
 
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
+        self.hideKeyboardWhenTappedAround()
     }
     
     @IBAction func loginButton(_ sender: UIButton) {
@@ -59,10 +43,14 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func signUpButton(_ sender: UIButton) {
 //        self.performSegue(withIdentifier: "SignUp", sender: nil)
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "signup") as? SignUpVC
-        self.navigationController?.pushViewController(vc!, animated: true)
+//        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "signup") as? SignUpVC
+//        self.navigationController?.pushViewController(vc!, animated: true)
 //        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "signup") as! SignUpVC
 //        self.show(vc, sender: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc: UIViewController = storyboard.instantiateViewController(identifier: "signup") as! SignUpVC
+        
+        self.show(vc, sender: nil)
         
     }
     

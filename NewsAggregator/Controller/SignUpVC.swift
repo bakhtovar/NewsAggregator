@@ -30,87 +30,9 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         emailValue.delegate = self
         passwordValue.delegate = self
         numberValue.delegate = self
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        
         self.hideKeyboardWhenTappedAround()
     }
-    var isExpand: Bool = false
-    
 
-//    @objc func keyboardWillShow(notification: Notification) {
-//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-//                if view.frame.origin.y == 0 {
-//                    self.view.frame.origin.y -= keyboardSize.height
-//                }
-//            }
-//
-//        if !isExpand  {
-//            self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 250)
-//            isExpand = true
-//        }
-//
-//    }
-
-//    @objc func keyboardWillHide(notification: Notification) {
-//        if isExpand  {
-//            self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height - 250)
-//            isExpand = false
-//        }
-//
-//        if self.view.frame.origin.y != 0 {
-//                self.view.frame.origin.y = 0
-//            }
-//
-//
-//    }
-//
-
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                if view.frame.origin.y == 0 {
-                    self.view.frame.origin.y -= keyboardSize.height
-                }
-            }
-        guard let userInfo = notification.userInfo else { return }
-        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-
-        var contentInset:UIEdgeInsets = self.scrollView.contentInset
-        contentInset.bottom = keyboardFrame.size.height + 20
-        scrollView.contentInset = contentInset
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification) {
-
-        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
-        scrollView.contentInset = contentInset
-        
-        if self.view.frame.origin.y != 0 {
-                self.view.frame.origin.y = 0
-            }
-    }
-    
-//    @objc func keyboardWillShow(notification:NSNotification) {
-//        guard let keyboardFrameValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
-//            return
-//        }
-//        let keyboardFrame = view.convert(keyboardFrameValue.cgRectValue, from: nil)
-//        scrollView.contentOffset = CGPoint(x:0, y:keyboardFrame.size.height + 50)
-//    }
-//
-//    @objc func keyboardWillHide(notification:NSNotification) {
-//        scrollView.contentOffset = .zero
-//    }
-    
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     @IBAction func registerButton(_ sender: Any) {
         //self.performSegue(withIdentifier: "goNumber", sender: nil)
         signUp()

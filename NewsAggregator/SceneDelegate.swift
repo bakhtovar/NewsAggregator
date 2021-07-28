@@ -23,16 +23,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: winScene)
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(identifier: "main")
-                self.window!.rootViewController = vc
-                self.window?.makeKeyAndVisible()
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(identifier: "main")
+            self.window!.rootViewController = vc
+            self.window?.makeKeyAndVisible()
                 
             } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "SignInVC") as! SignInVC
             self.window!.rootViewController = vc
             self.window?.makeKeyAndVisible()
+        
             }
         }
         

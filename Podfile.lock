@@ -87,6 +87,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.5.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.6.1)
+  - IQKeyboardManagerSwift (6.5.6)
   - Kingfisher (6.3.0)
   - leveldb-library (1.22.1)
   - nanopb (2.30908.0):
@@ -102,6 +103,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
+  - IQKeyboardManagerSwift
   - Kingfisher (~> 6.0)
   - SkeletonView
   - SwiftGifOrigin
@@ -119,6 +121,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - GTMSessionFetcher
+    - IQKeyboardManagerSwift
     - Kingfisher
     - leveldb-library
     - nanopb
@@ -138,6 +141,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
   GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
@@ -145,6 +149,6 @@ SPEC CHECKSUMS:
   SkeletonView: 2398e9081a16f6a5d52ebabaed5d5b19873ed8f3
   SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
 
-PODFILE CHECKSUM: 95d6eed200a0afd0aacf8113d094861e65ded569
+PODFILE CHECKSUM: 23e2ab9c0ceb243c1c8cf615adf213c277af775a
 
 COCOAPODS: 1.10.1

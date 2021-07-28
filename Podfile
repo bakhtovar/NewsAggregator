@@ -14,5 +14,6 @@ target 'NewsAggregator' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'SwiftGifOrigin'
+  pod 'IQKeyboardManagerSwift'
 
 end
