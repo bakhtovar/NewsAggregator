@@ -20,7 +20,7 @@ class ResetVC: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ emailLabel: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
-       // scrollView.setContentOffset(point, animated: true)
+        //scrollView.setContentOffset(point, animated: true)
     }
 
     @IBAction func resetTapped(_ sender: Any) {

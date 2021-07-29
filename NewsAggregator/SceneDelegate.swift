@@ -25,15 +25,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if user != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "main")
-            self.window!.rootViewController = vc
+            let navigationController = self.window?.rootViewController as! UINavigationController
+            
             self.window?.makeKeyAndVisible()
-                
-            } else {
+//
+            }
+                else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "SignInVC") as! SignInVC
             self.window!.rootViewController = vc
             self.window?.makeKeyAndVisible()
-        
+
             }
         }
         

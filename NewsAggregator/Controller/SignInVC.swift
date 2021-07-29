@@ -26,10 +26,9 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         loginText.layer.cornerRadius = 20
         signupText.layer.cornerRadius = 5
         
-       print(navigationController)
+        print(navigationController)
         print("ffff")
-        
-//        navigationItem.hidesBackButton = true
+        navigationItem.hidesBackButton = true
         emailValue.delegate = self
         passwordValue.delegate = self
 
@@ -48,7 +47,7 @@ class SignInVC: UIViewController, UITextFieldDelegate {
 //        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "signup") as! SignUpVC
 //        self.show(vc, sender: nil)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc: UIViewController = storyboard.instantiateViewController(identifier: "signup") as! SignUpVC
+        let vc: UIViewController = storyboard.instantiateViewController(identifier: "SignUpVC") as! SignUpVC
         
         self.show(vc, sender: nil)
         
