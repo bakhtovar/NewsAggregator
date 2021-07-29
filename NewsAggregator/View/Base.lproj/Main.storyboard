@@ -73,7 +73,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="y0N-su-5Ni">
-                                <rect key="frame" x="10" y="148" width="394" height="665"/>
+                                <rect key="frame" x="10" y="148" width="394" height="714"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Jxa-O9-TCw">
                                     <size key="itemSize" width="0.0" height="0.0"/>
@@ -117,7 +117,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IQu-rC-o43">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
@@ -152,7 +152,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJZ-hE-9ji">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
@@ -423,6 +423,7 @@
                         <outlet property="passwordValue" destination="3qH-SZ-ZHE" id="nAd-Xy-RXn"/>
                         <outlet property="signInLabel" destination="AWK-t6-MqA" id="1gC-in-tFp"/>
                         <outlet property="signupText" destination="DnP-f2-fqO" id="R1m-uw-1f9"/>
+                        <segue destination="d0J-vd-dgk" kind="show" identifier="toMain" id="eXn-e5-r6N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huo-LH-crU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -664,12 +665,12 @@
                                             <constraint firstItem="2jJ-4Z-MFq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mhs-EE-B2a" secondAttribute="leading" symbolic="YES" id="E75-sp-zor"/>
                                             <constraint firstItem="mSg-f2-PWt" firstAttribute="top" secondItem="mhs-EE-B2a" secondAttribute="top" constant="100" id="ERe-3m-7RQ"/>
                                             <constraint firstAttribute="trailing" secondItem="zir-aK-ynR" secondAttribute="trailing" constant="40" id="H1J-Gj-Mcj"/>
-                                            <constraint firstItem="7tH-Eu-CU1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mhs-EE-B2a" secondAttribute="leading" symbolic="YES" id="Ih5-F2-l6f"/>
+                                            <constraint firstItem="7tH-Eu-CU1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mhs-EE-B2a" secondAttribute="leading" constant="20" symbolic="YES" id="Ih5-F2-l6f"/>
                                             <constraint firstItem="Snm-mm-doy" firstAttribute="centerX" secondItem="mhs-EE-B2a" secondAttribute="centerX" id="KMs-gR-ewv"/>
-                                            <constraint firstItem="YRD-L5-4BQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mhs-EE-B2a" secondAttribute="leading" symbolic="YES" id="MjM-0c-BC2"/>
+                                            <constraint firstItem="YRD-L5-4BQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mhs-EE-B2a" secondAttribute="leading" constant="20" symbolic="YES" id="MjM-0c-BC2"/>
                                             <constraint firstItem="YRD-L5-4BQ" firstAttribute="top" secondItem="7tH-Eu-CU1" secondAttribute="bottom" constant="20" id="RrW-CY-yiP"/>
                                             <constraint firstItem="zir-aK-ynR" firstAttribute="top" secondItem="2jJ-4Z-MFq" secondAttribute="bottom" constant="20" id="USc-TI-STi"/>
-                                            <constraint firstItem="zir-aK-ynR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mhs-EE-B2a" secondAttribute="leading" symbolic="YES" id="ZHo-Sg-81n"/>
+                                            <constraint firstItem="zir-aK-ynR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mhs-EE-B2a" secondAttribute="leading" constant="20" symbolic="YES" id="ZHo-Sg-81n"/>
                                             <constraint firstItem="7tH-Eu-CU1" firstAttribute="top" secondItem="mSg-f2-PWt" secondAttribute="bottom" constant="200" id="dUD-yx-e2c"/>
                                             <constraint firstItem="Snm-mm-doy" firstAttribute="top" secondItem="zir-aK-ynR" secondAttribute="bottom" constant="100" id="ddb-o9-vhL"/>
                                             <constraint firstItem="Snm-mm-doy" firstAttribute="top" secondItem="zir-aK-ynR" secondAttribute="bottom" constant="100" id="jyu-2V-b2Q"/>
@@ -719,6 +720,9 @@
             <point key="canvasLocation" x="-5817" y="216"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="eXn-e5-r6N"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="homekit" catalog="system" width="128" height="106"/>

@@ -28,11 +28,20 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         
         print(navigationController)
         print("ffff")
-        navigationItem.hidesBackButton = true
+        //navigationItem.hidesBackButton = true
         emailValue.delegate = self
         passwordValue.delegate = self
 
         self.hideKeyboardWhenTappedAround()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     @IBAction func loginButton(_ sender: UIButton) {

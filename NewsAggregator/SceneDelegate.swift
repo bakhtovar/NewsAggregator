@@ -25,20 +25,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if user != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "main")
-            let navigationController = self.window?.rootViewController as! UINavigationController
-            
+            self.window?.rootViewController = vc
             self.window?.makeKeyAndVisible()
-//
-            }
-                else {
+                
+            } else {
+                
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(identifier: "SignInVC") as! SignInVC
-            self.window!.rootViewController = vc
+            let vc = storyboard.instantiateViewController(identifier: "SignInVC") as? SignInVC
+            let rootNC = UINavigationController(rootViewController: vc!)
+            self.window?.rootViewController = rootNC
             self.window?.makeKeyAndVisible()
 
             }
         }
-        
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
