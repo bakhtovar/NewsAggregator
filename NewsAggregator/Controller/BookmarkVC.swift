@@ -16,6 +16,8 @@ class BookmarkVC: UIViewController {
     var labelText: String?
     var sourceName: String?
     var bookmarks = [Bookmarks]()
+    var messageLabel: UILabel?
+    
     
     @IBOutlet weak var table: UITableView!
     
@@ -31,8 +33,8 @@ class BookmarkVC: UIViewController {
         
     }
     
-    // MARK: - Navigation
-
+    // MARK: - NAVIGATION
+    
     func fetchData() {
         let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
         do {
@@ -52,10 +54,25 @@ class BookmarkVC: UIViewController {
 extension BookmarkVC: UITableViewDelegate,  UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bookmarks.count
+        if self.bookmarks.count > 0 {
+            table.backgroundView = nil
+            return self.bookmarks.count
+           } else {
+            print(bookmarks.count)
+            print("fff")
+            let emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+            emptyLabel.text = "There is no bookmark added."
+            emptyLabel.textAlignment = NSTextAlignment.center
+            self.table.backgroundView = emptyLabel
+            self.table.separatorStyle = UITableViewCell.SeparatorStyle.none
+            return 0
+           }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+       
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! ArticleCell
         
         let article = bookmarks[indexPath.row]
@@ -71,6 +88,7 @@ extension BookmarkVC: UITableViewDelegate,  UITableViewDataSource {
         if let image = URL(string: article.urlToImage ?? "") {
             cell.imageIcon.kf.setImage(with: image, placeholder: nil)
         }
+        
        
         return cell
     }

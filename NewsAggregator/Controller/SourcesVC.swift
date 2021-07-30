@@ -13,9 +13,12 @@ class SourcesVC: UIViewController {
     @IBOutlet weak var sourcesSearch: UISearchBar!
     @IBOutlet weak var sourcesCollectionView: UICollectionView!
     
-    // MARK: - making and instance of structs
+
+    // MARK: - MAKING AN INSTANCE OF STRUCTS
     var category = CategoriesBrain()
     var sources: Sources?
+    
+    //MARK: - CREATE A COPY FOR FILTERING
     var filteredData: Sources?
     
     override func viewDidLoad() {
@@ -23,6 +26,7 @@ class SourcesVC: UIViewController {
         configureNavbarAndSearchBar()
         configureCollectionView()
     
+      //MARK: - GETTING DATA FROM JSON
         APICall.shared.getSources { (response) in
             DispatchQueue.main.async {
                 self.sources = response
@@ -57,7 +61,7 @@ extension SourcesVC :
         return sources?.sources.count ?? 10
     }
     
-    //MARK: - assigning the data
+    //MARK: - ASSIGNING THE DATA
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SourcesCell", for: indexPath) as! SourcesCell
         let vc = sources?.sources[indexPath.row]
@@ -86,11 +90,13 @@ extension SourcesVC :
         cell.layer.cornerRadius = 10
         return cell
     }
-    //MARK: - adding borders
+    //MARK: - ADDING BORDERS
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 7, left: 7, bottom: 0, right: 7)
     }
+    
+    //MARK: - SETTING SIZES
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding:CGFloat = 13
@@ -101,10 +107,9 @@ extension SourcesVC :
         return CGSize(width: getWidth, height: getWidth)
     }
     
-    //MARK: - sending the data to CategoryVC
+    //MARK: - SENDING DATA TO THE CATEGORYVC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let tappedCategory = sources?.sources[indexPath.row]
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let vc = storyboard.instantiateViewController(identifier: "CategoryVC") as! CategoryVC
@@ -122,7 +127,8 @@ extension SourcesVC: UISearchBarDelegate {
                 sourcesCollectionView.reloadData()
                 return
             }
-        //MARK: - filtering the array by source.name
+        //MARK: -  FILTERING THE ARRAY BY SOURCE.NAME
+      
         sources?.sources = (filteredData?.sources.filter({ source -> Bool in
             (source.name?.lowercased().contains(searchText.lowercased()))!
         }))!

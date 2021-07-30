@@ -21,14 +21,14 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     var bookmarks = [Bookmarks]()
     
+    //MARK: - CORE DATA
     let context = (UIApplication.shared.delegate as!
                     AppDelegate).persistentContainer.viewContext
     let saveContent: () = (UIApplication.shared.delegate as!
                             AppDelegate).saveContext()
     override func viewDidLoad() {
-        
+    
         fetchData()
-        
         super.viewDidLoad()
         
         webView.navigationDelegate = self
@@ -43,7 +43,7 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
         activityIndicator.isHidden = true
         
         view.addSubview(activityIndicator)
-        
+        //MARK: - LINK FOR IMG
         guard let request = URL(string: url ?? "text") else {
             return
         }
@@ -51,6 +51,7 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
         webView.load(URLRequest(url: request))
         
     }
+    //MARK: - CHECHKING FOR BOOKMARK EXISTINCE
     func fetchData() {
         
         let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
@@ -69,7 +70,7 @@ class WebviewVC: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     
     @IBAction func buttonClicked(_ sender: UIBarButtonItem) {
-        
+        //  MARK: - TOGGLING
         let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "titleName == %@", titleName!)
         

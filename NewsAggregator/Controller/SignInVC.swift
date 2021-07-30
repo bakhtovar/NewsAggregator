@@ -8,8 +8,6 @@
 import UIKit
 import Firebase
 
-
-
 class SignInVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var signInLabel: UILabel!
@@ -26,19 +24,18 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         loginText.layer.cornerRadius = 20
         signupText.layer.cornerRadius = 5
         
-        print(navigationController)
-        print("ffff")
-        //navigationItem.hidesBackButton = true
         emailValue.delegate = self
         passwordValue.delegate = self
-
+        
         self.hideKeyboardWhenTappedAround()
     }
+    
+    //MARK: - HIDE NAV BAR
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -47,19 +44,12 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     @IBAction func loginButton(_ sender: UIButton) {
         signIn()
     }
-   
+    
     
     @IBAction func signUpButton(_ sender: UIButton) {
-//        self.performSegue(withIdentifier: "SignUp", sender: nil)
-//        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "signup") as? SignUpVC
-//        self.navigationController?.pushViewController(vc!, animated: true)
-//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "signup") as! SignUpVC
-//        self.show(vc, sender: nil)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc: UIViewController = storyboard.instantiateViewController(identifier: "SignUpVC") as! SignUpVC
-        
         self.show(vc, sender: nil)
-        
     }
     
     func showAlert() {

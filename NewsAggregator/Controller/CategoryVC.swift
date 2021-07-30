@@ -39,12 +39,13 @@ class CategoryVC: UIViewController  {
         } else {
             self.title = sourceName
         }
+        //MARK: - PULL TO REFRESH
         
         refresh.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         myTableView?.addSubview(refresh)
         
-        //MARK: - using skeleton library
+        //MARK: - USAGE OF SKELETON
         myTableView.isSkeletonable = true
         myTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .emerald), animation: nil, transition: .crossDissolve(0.25))
         myTableView.startSkeletonAnimation()
@@ -70,7 +71,7 @@ class CategoryVC: UIViewController  {
             }
         }
     }
-    
+    //MARK: - REFRESHING FUNC
     @objc func refreshData (refreshControl: UIRefreshControl) {
         
         catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)

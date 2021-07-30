@@ -37,7 +37,8 @@ extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
         self.myCollectionView.delegate = self
         self.myCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
         
-        //MARK: - register is nedeed for cell (item)
+        //MARK: - REGISTER IS NEDEED FOR CELL(ITEM)
+       
         self.myCollectionView.register(UINib(nibName: "CategoryCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCell")
     }
     
@@ -45,7 +46,7 @@ extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return category.cat.count
     }
-    //MARK: - draw ans assign properties
+    //MARK: - DRAW AND ASSING PROPS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
         let categoryName = category.cat[indexPath.row]
@@ -55,12 +56,14 @@ extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
         return cell
     }
     
-    //MARK: - up/down/left/rigt - for each item
+    //MARK: - UP/DOWN/LEFT/RIGHT - FOR EACH ITEM
+  
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 7, left: 7, bottom: 0, right: 7)
     }
     
-    //MARK: - size of each item in CollectionView
+    //MARK: - SIZE OF EACH ITEM IN COLLECTIONVIEW
+   
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding:CGFloat = 13
         let space: CGFloat = 10
@@ -68,14 +71,15 @@ extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
         let getWidth = itemWidth/2
         return CGSize(width: getWidth, height: getWidth)
     }
-    //MARK: - navigation on tapping
+    //MARK: - NAVIGATION ON TAPPING
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let tappedCategory = category.cat[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "CategoryVC") as! CategoryVC
         
-        //sending to CategoryVC
+        //MARK: - SENDING TO CATEGORYVC
+        
         vc.titleName = tappedCategory.nameLabel
         vc.urlString = tappedCategory.url
         vc.labelText = searchBar.text
@@ -87,13 +91,13 @@ extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
 extension CategoriesVC: UISearchBarDelegate {
     
     func hideKeyboard() {
-        //MARK: - hides keyboard
+        //MARK: - HIDES KEYBOARD
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
     }
     
-    //MARK: - action in searchBar
+    //MARK: - ACTION IN SEARCHBAR
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
         let searchText = searchBar.text!
@@ -104,7 +108,7 @@ extension CategoriesVC: UISearchBarDelegate {
         vc.labelText = searchText
         self.navigationController?.pushViewController(vc, animated: true)
         
-        //MARK: - clear the searchbar.text
+        //MARK: - CLEAR THE SEARCHBAR.TEXT
         if searchBar.text != nil {
             searchBar.text = ""
         }

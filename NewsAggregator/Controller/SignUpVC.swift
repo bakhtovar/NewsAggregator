@@ -9,8 +9,6 @@ import UIKit
 import Firebase
 
 class SignUpVC: UIViewController, UITextFieldDelegate {
-    
-    
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var nameValue: UITextField!
@@ -18,9 +16,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordValue: UITextField!
     @IBOutlet weak var registerText: UIButton!
     @IBOutlet weak var numberValue: UITextField!
-    
-    var textFieldRealYPosition: CGFloat = 0.0
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +29,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func registerButton(_ sender: Any) {
-        //self.performSegue(withIdentifier: "goNumber", sender: nil)
+      
         signUp()
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        let vc: UIViewController = storyboard.instantiateViewController(identifier: "NumberAuthVC") as! NumberAuthVC

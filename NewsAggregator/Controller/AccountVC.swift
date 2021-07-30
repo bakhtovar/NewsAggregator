@@ -12,9 +12,7 @@ import SwiftGifOrigin
 
 class AccountVC: UIViewController {
     
-    
-    
-  //  var ref: DatabaseReference!
+  //MARK: -  REFERING TO DATABASE
    var ref = Database.database().reference(fromURL: "news-acae1-default-rtdb.firebaseio.com/")
     var currentName : String?
     
@@ -22,26 +20,8 @@ class AccountVC: UIViewController {
     @IBOutlet weak var avatarImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.hidesBackButton = true
-        
-    
         avatarImage.image = UIImage.gif(name: "avatar")
-        
-        
-//        if let user = Auth.auth().currentUser {
-//
-//            //userName.text = "Hi, \(user.displayName)"
-//
-//
-//        if let user = Auth.auth().currentUser {
-//           userName.text = user.displayName
-//
-//        } else {
-//          print("No Current User")
-//        }
-//        print(userName.text)
-    
         loadUserData()
      
     }
