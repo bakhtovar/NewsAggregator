@@ -583,6 +583,91 @@
             </objects>
             <point key="canvasLocation" x="-5817" y="-560"/>
         </scene>
+        <!--OtpVC-->
+        <scene sceneID="z3I-LH-o5i">
+            <objects>
+                <viewController storyboardIdentifier="OtpVC" id="f6X-wc-rtk" customClass="OtpVC" customModule="NewsAggregator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="th8-Ux-srP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter the code you recevied on your number." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIQ-3z-AlQ">
+                                <rect key="frame" x="10" y="144" width="394" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9s-K1-gPs">
+                                <rect key="frame" x="10" y="235" width="394" height="70"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ryW-Ix-A1A">
+                                        <rect key="frame" x="0.0" y="0.0" width="91" height="70"/>
+                                        <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W7H-gL-Dvh">
+                                        <rect key="frame" x="303" y="0.0" width="91" height="70"/>
+                                        <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Kl-Cd-VlC">
+                                        <rect key="frame" x="202" y="0.0" width="91" height="70"/>
+                                        <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wd4-wQ-bue">
+                                        <rect key="frame" x="101" y="0.0" width="91" height="70"/>
+                                        <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="wd4-wQ-bue" secondAttribute="bottom" id="0CB-ac-EYv"/>
+                                    <constraint firstItem="1Kl-Cd-VlC" firstAttribute="leading" secondItem="wd4-wQ-bue" secondAttribute="trailing" constant="10" id="2TW-Sk-hhc"/>
+                                    <constraint firstItem="ryW-Ix-A1A" firstAttribute="leading" secondItem="E9s-K1-gPs" secondAttribute="leading" id="3aR-pg-s8p"/>
+                                    <constraint firstItem="W7H-gL-Dvh" firstAttribute="leading" secondItem="1Kl-Cd-VlC" secondAttribute="trailing" constant="10" id="IMY-r4-Fa0"/>
+                                    <constraint firstAttribute="bottom" secondItem="1Kl-Cd-VlC" secondAttribute="bottom" id="IPd-Ne-paR"/>
+                                    <constraint firstItem="W7H-gL-Dvh" firstAttribute="top" secondItem="E9s-K1-gPs" secondAttribute="top" id="Re6-kE-XGn"/>
+                                    <constraint firstItem="ryW-Ix-A1A" firstAttribute="width" secondItem="E9s-K1-gPs" secondAttribute="width" multiplier="0.231" id="b1u-cg-Ibj"/>
+                                    <constraint firstAttribute="height" constant="70" id="btO-Cx-yBN"/>
+                                    <constraint firstAttribute="bottom" secondItem="ryW-Ix-A1A" secondAttribute="bottom" id="e5t-Up-3iu"/>
+                                    <constraint firstItem="wd4-wQ-bue" firstAttribute="top" secondItem="E9s-K1-gPs" secondAttribute="top" id="fij-Hc-5kc"/>
+                                    <constraint firstItem="W7H-gL-Dvh" firstAttribute="width" secondItem="ryW-Ix-A1A" secondAttribute="width" id="m6C-PS-fth"/>
+                                    <constraint firstAttribute="trailing" secondItem="W7H-gL-Dvh" secondAttribute="trailing" id="pJD-Et-U4M"/>
+                                    <constraint firstItem="wd4-wQ-bue" firstAttribute="width" secondItem="ryW-Ix-A1A" secondAttribute="width" id="qcg-KK-saV"/>
+                                    <constraint firstItem="ryW-Ix-A1A" firstAttribute="top" secondItem="E9s-K1-gPs" secondAttribute="top" id="r7q-j1-Ag0"/>
+                                    <constraint firstItem="1Kl-Cd-VlC" firstAttribute="width" secondItem="W7H-gL-Dvh" secondAttribute="width" id="udd-pI-LnE"/>
+                                    <constraint firstAttribute="bottom" secondItem="W7H-gL-Dvh" secondAttribute="bottom" id="uqd-3r-pIr"/>
+                                    <constraint firstItem="1Kl-Cd-VlC" firstAttribute="top" secondItem="E9s-K1-gPs" secondAttribute="top" id="vVc-Ay-pv7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DOx-Dy-oaH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DOx-Dy-oaH" firstAttribute="trailing" secondItem="eIQ-3z-AlQ" secondAttribute="trailing" constant="10" id="9RH-e1-oWi"/>
+                            <constraint firstItem="eIQ-3z-AlQ" firstAttribute="top" secondItem="DOx-Dy-oaH" secondAttribute="top" constant="100" id="NKm-az-U5A"/>
+                            <constraint firstItem="E9s-K1-gPs" firstAttribute="top" secondItem="eIQ-3z-AlQ" secondAttribute="bottom" constant="50" id="P5e-6K-HPb"/>
+                            <constraint firstItem="E9s-K1-gPs" firstAttribute="leading" secondItem="DOx-Dy-oaH" secondAttribute="leading" constant="10" id="WZS-fl-Fn5"/>
+                            <constraint firstItem="eIQ-3z-AlQ" firstAttribute="leading" secondItem="DOx-Dy-oaH" secondAttribute="leading" constant="10" id="XKe-2Q-kRC"/>
+                            <constraint firstItem="DOx-Dy-oaH" firstAttribute="trailing" secondItem="E9s-K1-gPs" secondAttribute="trailing" constant="10" id="dXP-Iy-58V"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textOTP1" destination="ryW-Ix-A1A" id="o08-ia-7iq"/>
+                        <outlet property="textOTP2" destination="wd4-wQ-bue" id="Ei7-OK-zJO"/>
+                        <outlet property="textOTP3" destination="1Kl-Cd-VlC" id="7du-1Q-UWw"/>
+                        <outlet property="textOTP4" destination="W7H-gL-Dvh" id="4pL-kZ-LdA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tdn-WN-ooh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5862.3188405797109" y="944.86607142857133"/>
+        </scene>
         <!--Number AuthVC-->
         <scene sceneID="cnR-IP-1hK">
             <objects>
@@ -783,6 +868,9 @@
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

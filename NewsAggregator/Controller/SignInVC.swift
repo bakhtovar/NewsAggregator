@@ -48,7 +48,8 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func signUpButton(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc: UIViewController = storyboard.instantiateViewController(identifier: "SignUpVC") as! SignUpVC
+//        let vc: UIViewController = storyboard.instantiateViewController(identifier: "SignUpVC") as! SignUpVC
+        let vc: UIViewController = storyboard.instantiateViewController(identifier: "OtpVC") as! OtpVC
         self.show(vc, sender: nil)
     }
     
@@ -59,7 +60,7 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     }
     
     func signIn() {
-        if let password = passwordValue.text, let email = emailValue.text{
+        if let password = passwordValue.text, let email = emailValue.text {
             
             Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
                 
