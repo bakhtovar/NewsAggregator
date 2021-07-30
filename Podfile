@@ -11,6 +11,9 @@ target 'NewsAggregator' do
   pod 'Kingfisher', '~> 6.0'
 
   pod 'Firebase/Auth'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Analytics'
+  
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'SwiftGifOrigin'

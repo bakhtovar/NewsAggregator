@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import FirebaseCore
+import FirebaseAuth
 class NumberAuthVC: UIViewController {
 
     override func viewDidLoad() {

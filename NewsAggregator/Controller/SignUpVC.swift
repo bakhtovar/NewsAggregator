@@ -36,6 +36,10 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     @IBAction func registerButton(_ sender: Any) {
         //self.performSegue(withIdentifier: "goNumber", sender: nil)
         signUp()
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc: UIViewController = storyboard.instantiateViewController(identifier: "NumberAuthVC") as! NumberAuthVC
+//
+//        self.show(vc, sender: nil)
         
     }
     
