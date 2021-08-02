@@ -17,15 +17,22 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordValue: UITextField!
     @IBOutlet weak var loginText: UIButton!
     @IBOutlet weak var signupText: UIButton!
+    @IBOutlet weak var phoneValue: UITextField!
+    @IBOutlet weak var phoneLabel: UILabel!
+    
+   
+    let userDefault = UserDefaults.standard
     override func viewDidLoad() {
-        
+               
         super.viewDidLoad()
         
         loginText.layer.cornerRadius = 20
         signupText.layer.cornerRadius = 5
+        phoneLabel.layer.cornerRadius = 5
         
         emailValue.delegate = self
         passwordValue.delegate = self
+        phoneValue.delegate = self
         
         self.hideKeyboardWhenTappedAround()
     }
@@ -43,14 +50,14 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginButton(_ sender: UIButton) {
         signIn()
+       
     }
     
     
     @IBAction func signUpButton(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc: UIViewController = storyboard.instantiateViewController(identifier: "SignUpVC") as! SignUpVC
-        let vc: UIViewController = storyboard.instantiateViewController(identifier: "OtpVC") as! OtpVC
-        self.show(vc, sender: nil)
+        let vc: UIViewController = storyboard.instantiateViewController(identifier: "SignUpVC") as! SignUpVC
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func showAlert() {
@@ -60,23 +67,42 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     }
     
     func signIn() {
-        if let password = passwordValue.text, let email = emailValue.text {
-            
-            Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-                
-                if let e = error {
-                    print(e)
-                    let alert = Service.createAlertController(title: "Error", message: e.localizedDescription)
-                    self!.present(alert, animated: true,completion: nil)
-                } else {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewController(identifier: "main")
-                    vc.modalPresentationStyle = .overFullScreen
-                    self!.present(vc, animated: true)
+        
+        
+        guard let phone = phoneValue.text else {
+            return
+        }
+        
+        PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { verificationID, error in
+            if let error = error {
+            let alert = Service.createAlertController(title: "Error", message: error.localizedDescription)
+            self.present(alert, animated: true, completion: nil)
+              } else {
+                guard let verifuID = verificationID else {
+                    return
                 }
                 
-            }
+                self.userDefault.set(verifuID, forKey: "authVerificationID")
+            
+              }
+            
+          }
+
+     
+        if (!emailValue.text!.isEmpty && !passwordValue.text!.isEmpty && !phoneValue.text!.isEmpty) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(identifier: "OtpVC") as! OtpVC
+
+            vc.emailLabel = self.emailValue.text
+            vc.passwordLabel = self.passwordValue.text
+            vc.phoneLabel = self.phoneValue.text
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let alert = Service.createAlertController(title: "Error", message: "Fill out the fields")
+            self.present(alert, animated: true,completion: nil)
+            
         }
+
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
