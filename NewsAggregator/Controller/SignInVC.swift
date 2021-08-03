@@ -7,6 +7,9 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
+
+
 
 class SignInVC: UIViewController, UITextFieldDelegate {
     
@@ -67,8 +70,7 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     }
     
     func signIn() {
-        
-        
+       
         guard let phone = phoneValue.text else {
             return
         }
@@ -77,22 +79,13 @@ class SignInVC: UIViewController, UITextFieldDelegate {
             if let error = error {
             let alert = Service.createAlertController(title: "Error", message: error.localizedDescription)
             self.present(alert, animated: true, completion: nil)
-              } else {
-                guard let verifuID = verificationID else {
-                    return
-                }
-                
-                self.userDefault.set(verifuID, forKey: "authVerificationID")
-            
               }
-            
-          }
-
+                self.userDefault.set(verificationID, forKey: "authVerificationID")
+        }
      
         if (!emailValue.text!.isEmpty && !passwordValue.text!.isEmpty && !phoneValue.text!.isEmpty) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "OtpVC") as! OtpVC
-
             vc.emailLabel = self.emailValue.text
             vc.passwordLabel = self.passwordValue.text
             vc.phoneLabel = self.phoneValue.text

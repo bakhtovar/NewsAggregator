@@ -18,11 +18,16 @@ class OtpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textOTP4: UITextField!
     @IBOutlet weak var textOTP5: UITextField!
     @IBOutlet weak var textOTP6: UITextField!
+//    var textFieldArray: [UITextField] {
+//    return [textOTP1!, textOTP2!, textOTP3!, textOTP4!, textOTP5!, textOTP6!]
+//}
+//
     
     var emailLabel: String?
     var passwordLabel: String?
     var phoneLabel : String?
     var code : String?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +37,7 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         textOTP4.backgroundColor = UIColor.clear
         textOTP5.backgroundColor = UIColor.clear
         textOTP6.backgroundColor = UIColor.clear
-    
+        
         
         addBottomBorderTo(textField: textOTP1)
         addBottomBorderTo(textField: textOTP2)
@@ -55,6 +60,10 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         textOTP4.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
         textOTP5.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
         textOTP6.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+        
+        
+       // getConsolidatedString()
+    //code = textFieldArray.compactMap{$0.text}.joined()
     }
     
     @objc func textFieldDidChange(textField: UITextField){
@@ -100,54 +109,53 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+//    func getConsolidatedString() -> String {
+//        var finalString = ""
+//        for textField in textFieldArray {
+//            finalString += textField.text ?? ""
+//        }
+//        return finalString
+//    }
+    
     func addBottomBorderTo(textField: UITextField) {
         let layer = CALayer()
         layer.backgroundColor = UIColor.gray.cgColor
         layer.frame = CGRect(x: 0.0, y: textField.frame.size.height - 2.0, width: textField.frame.size.width , height: 2.0)
         textField.layer.addSublayer(layer)
     }
-    
+                
     
     @IBAction func loginButton(_ sender: UIButton) {
-        code = "\(String(describing: textOTP1.text))\(String(describing: textOTP2.text))\(String(describing: textOTP3.text))\(String(describing: textOTP4.text))\(String(describing: textOTP5.text))\(String(describing: textOTP6.text))"
-        guard let otpCode = code else {return}
+      //  code = "\(String(describing: textOTP1.text))\(String(describing: textOTP2.text))\(String(describing: textOTP3.text))\(String(describing: textOTP4.text))\(String(describing: textOTP5.text))\(String(describing: textOTP6.text))"
+       
+        let str = textOTP1.text! + textOTP2.text! + textOTP3.text! + textOTP4.text!
+        code = str + textOTP5.text! + textOTP6.text!
+        guard let otpCode = code else { return }
         guard let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") else { return }
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: otpCode)
+        let credential: PhoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: otpCode)
+        print(verificationID)
+        print("dd")
+        print(otpCode)
         
-        if let password = passwordLabel, let email = emailLabel {
-            Auth.auth().signIn(withEmail: email, password: password ) { [weak self] authResult, error in
-                if let e = error {
-                    print(e)
-                    let alert = Service.createAlertController(title: "Error", message: e.localizedDescription)
-                    self!.present(alert, animated: true,completion: nil)
+        
+        if code != nil {
+            Auth.auth().signIn(with: credential) { (success, error) in
+                if (success != nil){
+                    print(success)
+                    print("ss")
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(identifier: "main")
+                    vc.modalPresentationStyle = .overFullScreen
+                    self.present(vc, animated: true)
+                    print("success")
                 } else {
-                    if self?.code != nil {
-                    Auth.auth().signIn(with: credential) { (success, error) in
-                       
-                        if success != nil  {
-            
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let vc = storyboard.instantiateViewController(identifier: "main")
-                            vc.modalPresentationStyle = .overFullScreen
-                            self?.present(vc, animated: true)
-                            print(success)
-                            print("fff")
-                        } else {
-                            let alert = Service.createAlertController(title: "Error", message: error!.localizedDescription)
-                            self?.present(alert, animated: true,completion: nil)
-                            print(error)
-                            print("fd")
-                            }
-                        }
-                       
-                    } 
-                    
+                    let alert = Service.createAlertController(title: "Error", message: error!.localizedDescription)
+                    self.present(alert, animated: true,completion: nil)
+                    print(error?.localizedDescription)
+                    print("error")
                 }
-                
             }
         }
-  
+       
+        }
     }
-
-    
-}
