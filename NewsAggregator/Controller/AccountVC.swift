@@ -18,6 +18,7 @@ class AccountVC: UIViewController {
     
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var avatarImage: UIImageView!
+    @IBOutlet weak var phoneLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
@@ -30,14 +31,24 @@ class AccountVC: UIViewController {
         guard let uid  = Auth.auth().currentUser?.uid else {
             return
         }
+        
         Database.database().reference().child("users").child(uid).child("name").observeSingleEvent(of: .value) { (snapshot) in
             guard let name = snapshot.value as? String else { return }
-         // guard let number
+           // guard let number = snapshot.value as? String else { return }
             self.userName.text = "Hi, \(name)"
             UIView.animate(withDuration: 0.5) {
                 self.userName.alpha = 1
             }
         }
+        
+        Database.database().reference().child("users").child(uid).child("number").observeSingleEvent(of: .value) { (snapshot) in
+            guard let number = snapshot.value as? String else { return }
+            self.phoneLabel.text = "Your numbers are \(number)"
+            UIView.animate(withDuration: 0.5) {
+                self.userName.alpha = 1
+            }
+        }
+        
     }
 
     

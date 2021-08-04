@@ -66,7 +66,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
 //                        self.present(vc, animated: true)
 
                         let ref  = Database.database().reference().child("users")
-                        ref.child(res.user.uid).updateChildValues(["name" : name ?? "", "email": email ?? ""])
+                        ref.child(res.user.uid).updateChildValues(["name" : name ?? "", "email": email ?? "", "number": number ?? ""])
                         
                     }
                 }
