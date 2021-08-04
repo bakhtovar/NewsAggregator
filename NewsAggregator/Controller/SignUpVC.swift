@@ -52,6 +52,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         let number = numberValue.text
         
         if (!name!.isEmpty && !password!.isEmpty && !email!.isEmpty && !number!.isEmpty ) {
+            
             Auth.auth().createUser(withEmail: email ?? "", password: password ?? "") { (authResult, error) in
                 if let e = error {
                     print(e.localizedDescription)

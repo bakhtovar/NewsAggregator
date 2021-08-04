@@ -30,9 +30,9 @@ class AccountVC: UIViewController {
         guard let uid  = Auth.auth().currentUser?.uid else {
             return
         }
-        
         Database.database().reference().child("users").child(uid).child("name").observeSingleEvent(of: .value) { (snapshot) in
             guard let name = snapshot.value as? String else { return }
+         // guard let number
             self.userName.text = "Hi, \(name)"
             UIView.animate(withDuration: 0.5) {
                 self.userName.alpha = 1

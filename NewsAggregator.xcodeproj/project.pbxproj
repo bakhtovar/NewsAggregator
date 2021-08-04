@@ -12,7 +12,6 @@
 		D308E97326A9798100A6DD84 /* Bookmarks+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D308E97126A9798100A6DD84 /* Bookmarks+CoreDataProperties.swift */; };
 		D309657926AFFF3B001F9A6B /* ResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309657826AFFF3B001F9A6B /* ResetVC.swift */; };
 		D309657C26B003E0001F9A6B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309657B26B003E0001F9A6B /* Service.swift */; };
-		D309658426B08FE9001F9A6B /* NumberAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309658326B08FE9001F9A6B /* NumberAuthVC.swift */; };
 		D30AF072269CD2F700992348 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30AF071269CD2F700992348 /* SignInVC.swift */; };
 		D30AF076269CD51500992348 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30AF075269CD51500992348 /* SignUpVC.swift */; };
 		D31210E326B3F28A00CF52BC /* OtpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31210E226B3F28A00CF52BC /* OtpVC.swift */; };
@@ -26,6 +25,7 @@
 		D3352F0F267C610C004103DC /* CategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3352F0E267C610C004103DC /* CategoryVC.swift */; };
 		D365D960269F69DC00FAC1A1 /* NewsAggregator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D365D95E269F69DB00FAC1A1 /* NewsAggregator.xcdatamodeld */; };
 		D365D98C269FFD1300FAC1A1 /* BookmarkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365D98B269FFD1300FAC1A1 /* BookmarkVC.swift */; };
+		D380E03326BA58020078D78B /* NumberAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D380E03226BA58020078D78B /* NumberAuthVC.swift */; };
 		D381D41E269D9D2300695941 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D381D41D269D9D2300695941 /* GoogleService-Info.plist */; };
 		D381D421269DFFA100695941 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D420269DFFA100695941 /* AccountVC.swift */; };
 		D381D424269E124300695941 /* avatar.gif in Resources */ = {isa = PBXBuildFile; fileRef = D381D423269E124300695941 /* avatar.gif */; };
@@ -55,7 +55,6 @@
 		D308E97126A9798100A6DD84 /* Bookmarks+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bookmarks+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		D309657826AFFF3B001F9A6B /* ResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetVC.swift; sourceTree = "<group>"; };
 		D309657B26B003E0001F9A6B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = ../../../Service.swift; sourceTree = "<group>"; };
-		D309658326B08FE9001F9A6B /* NumberAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAuthVC.swift; sourceTree = "<group>"; };
 		D30AF071269CD2F700992348 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		D30AF075269CD51500992348 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		D31210E226B3F28A00CF52BC /* OtpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpVC.swift; sourceTree = "<group>"; };
@@ -69,6 +68,7 @@
 		D3352F0E267C610C004103DC /* CategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVC.swift; sourceTree = "<group>"; };
 		D365D95F269F69DC00FAC1A1 /* NewsAggregator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NewsAggregator.xcdatamodel; sourceTree = "<group>"; };
 		D365D98B269FFD1300FAC1A1 /* BookmarkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkVC.swift; sourceTree = "<group>"; };
+		D380E03226BA58020078D78B /* NumberAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAuthVC.swift; sourceTree = "<group>"; };
 		D381D41D269D9D2300695941 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D381D420269DFFA100695941 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		D381D423269E124300695941 /* avatar.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = avatar.gif; sourceTree = "<group>"; };
@@ -204,9 +204,9 @@
 				D381D420269DFFA100695941 /* AccountVC.swift */,
 				D365D98B269FFD1300FAC1A1 /* BookmarkVC.swift */,
 				D309657826AFFF3B001F9A6B /* ResetVC.swift */,
-				D309658326B08FE9001F9A6B /* NumberAuthVC.swift */,
 				D31210E226B3F28A00CF52BC /* OtpVC.swift */,
 				D31210E426B3FEAC00CF52BC /* CodeVC.swift */,
+				D380E03226BA58020078D78B /* NumberAuthVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -337,6 +337,7 @@
 				D31728B8268AFA37004E084D /* SourceViewModel.swift in Sources */,
 				D3D8703A2685992300F3E0C7 /* SourcesCell.swift in Sources */,
 				D308E97226A9798100A6DD84 /* Bookmarks+CoreDataClass.swift in Sources */,
+				D380E03326BA58020078D78B /* NumberAuthVC.swift in Sources */,
 				D3D8702F2681DCF600F3E0C7 /* Constans.swift in Sources */,
 				D31210E526B3FEAC00CF52BC /* CodeVC.swift in Sources */,
 				D3B3611F267B2BE1002DB248 /* SceneDelegate.swift in Sources */,
@@ -344,7 +345,6 @@
 				D30AF076269CD51500992348 /* SignUpVC.swift in Sources */,
 				D3B36138267B2D9F002DB248 /* SourcesVC.swift in Sources */,
 				D3352F0F267C610C004103DC /* CategoryVC.swift in Sources */,
-				D309658426B08FE9001F9A6B /* NumberAuthVC.swift in Sources */,
 				D365D98C269FFD1300FAC1A1 /* BookmarkVC.swift in Sources */,
 				D3B36145267B397A002DB248 /* CategoryModel.swift in Sources */,
 				D308E97326A9798100A6DD84 /* Bookmarks+CoreDataProperties.swift in Sources */,

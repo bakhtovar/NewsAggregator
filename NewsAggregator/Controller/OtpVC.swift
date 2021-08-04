@@ -126,8 +126,6 @@ class OtpVC: UIViewController, UITextFieldDelegate {
                 
     
     @IBAction func loginButton(_ sender: UIButton) {
-      //  code = "\(String(describing: textOTP1.text))\(String(describing: textOTP2.text))\(String(describing: textOTP3.text))\(String(describing: textOTP4.text))\(String(describing: textOTP5.text))\(String(describing: textOTP6.text))"
-       
         let str = textOTP1.text! + textOTP2.text! + textOTP3.text! + textOTP4.text!
         code = str + textOTP5.text! + textOTP6.text!
         guard let otpCode = code else { return }
@@ -141,18 +139,13 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         if code != nil {
             Auth.auth().signIn(with: credential) { (success, error) in
                 if (success != nil){
-                    print(success)
-                    print("ss")
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(identifier: "main")
                     vc.modalPresentationStyle = .overFullScreen
                     self.present(vc, animated: true)
-                    print("success")
                 } else {
                     let alert = Service.createAlertController(title: "Error", message: error!.localizedDescription)
                     self.present(alert, animated: true,completion: nil)
-                    print(error?.localizedDescription)
-                    print("error")
                 }
             }
         }
