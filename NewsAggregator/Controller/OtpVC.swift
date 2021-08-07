@@ -18,19 +18,16 @@ class OtpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textOTP4: UITextField!
     @IBOutlet weak var textOTP5: UITextField!
     @IBOutlet weak var textOTP6: UITextField!
-//    var textFieldArray: [UITextField] {
-//    return [textOTP1!, textOTP2!, textOTP3!, textOTP4!, textOTP5!, textOTP6!]
-//}
-//
-    
+    @IBOutlet weak var loginOTP: UIButton!
     var emailLabel: String?
     var passwordLabel: String?
     var phoneLabel : String?
     var code : String?
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginOTP.layer.cornerRadius = 10
         textOTP1.backgroundColor = UIColor.clear
         textOTP2.backgroundColor = UIColor.clear
         textOTP3.backgroundColor = UIColor.clear
@@ -53,19 +50,22 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         textOTP5.delegate = self
         textOTP5.delegate = self
         
-        
+
         textOTP1.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
         textOTP2.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
         textOTP3.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
         textOTP4.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
         textOTP5.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
         textOTP6.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
-        
+//
         
        // getConsolidatedString()
     //code = textFieldArray.compactMap{$0.text}.joined()
     }
-    
+   
+//
+   
+
     @objc func textFieldDidChange(textField: UITextField){
         let text = textField.text
         if  text?.count == 1 {
@@ -85,37 +85,26 @@ class OtpVC: UIViewController, UITextFieldDelegate {
             default:
                 break
             }
-        }
-        if  text?.count == 0 {
+        } else if text!.isEmpty  {
             switch textField{
-            case textOTP1:
-                textOTP1.becomeFirstResponder()
-            case textOTP2:
-                textOTP1.becomeFirstResponder()
-            case textOTP3:
-                textOTP2.becomeFirstResponder()
+            case textOTP6:
+                textOTP5.becomeFirstResponder()
+            case textOTP5:
+                textOTP4.becomeFirstResponder()
             case textOTP4:
                 textOTP3.becomeFirstResponder()
-            case textOTP5:
-                textOTP4.resignFirstResponder()
-            case textOTP6:
-                textOTP6.resignFirstResponder()
+            case textOTP3:
+                textOTP2.becomeFirstResponder()
+            case textOTP2:
+                textOTP1.becomeFirstResponder()
             default:
                 break
             }
         }
         else{
-            
+
         }
     }
-    
-//    func getConsolidatedString() -> String {
-//        var finalString = ""
-//        for textField in textFieldArray {
-//            finalString += textField.text ?? ""
-//        }
-//        return finalString
-//    }
     
     func addBottomBorderTo(textField: UITextField) {
         let layer = CALayer()
@@ -134,15 +123,21 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         print(verificationID)
         print("dd")
         print(otpCode)
-        
+        let number = phoneLabel
+        print("ddd")
         
         if code != nil {
+            
+      
             Auth.auth().signIn(with: credential) { (success, error) in
                 if (success != nil){
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(identifier: "main")
                     vc.modalPresentationStyle = .overFullScreen
                     self.present(vc, animated: true)
+                    
+                    let ref  = Database.database().reference().child("users")
+                    ref.child(success!.user.uid).setValue([ "number": number ?? ""])
                 } else {
                     let alert = Service.createAlertController(title: "Error", message: error!.localizedDescription)
                     self.present(alert, animated: true,completion: nil)

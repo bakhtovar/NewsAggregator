@@ -47,7 +47,9 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginButton(_ sender: UIButton) {
-        signIn()
+    
+       
+        self.signIn()
         
     }
     
@@ -70,19 +72,33 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     }
     
     func signIn() {
-        
+     
+//        Auth.auth().signIn(withCustomToken: emailValue.text!) { (result, error) in
+//            if let e = error {
+//                print(e)
+//                let alert = Service.createAlertController(title: "Error", message: e.localizedDescription)
+//                self.present(alert, animated: true,completion: nil)
+//            }
+//            else {
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let vc = storyboard.instantiateViewController(identifier: "main")
+//                vc.modalPresentationStyle = .overFullScreen
+//                self.present(vc, animated: true)
+//            }
+//        }
+      //  Auth.auth().currentUser.linkWithCredential
         if let password = passwordValue.text, let email = emailValue.text {
             Auth.auth().signIn(withEmail: email, password: password  ) { [weak self] authResult, error in
                 if let e = error {
                     print(e)
                     let alert = Service.createAlertController(title: "Error", message: e.localizedDescription)
-                    self!.present(alert, animated: true,completion: nil)
+                    self?.present(alert, animated: true,completion: nil)
                 } else {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(identifier: "main")
                     vc.modalPresentationStyle = .overFullScreen
                     self?.present(vc, animated: true)
-                    
+
                 }
             }
         }
@@ -96,4 +112,5 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     }
     
 }
+
 

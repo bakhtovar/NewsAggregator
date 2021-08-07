@@ -15,7 +15,7 @@ class ResetVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.emailLabel.delegate = self
-        
+        resetTitle.layer.cornerRadius = 5
     }
     func textFieldShouldReturn(_ emailLabel: UITextField) -> Bool {
         self.view.endEditing(true)

@@ -29,11 +29,11 @@ class NumberAuthVC: UIViewController, UITextFieldDelegate {
     }
     
     func signIn() {
-       
         guard let phone = numberLabel.text else {
             return
         }
-        
+      
+            
         PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { verificationID, error in
             if let error = error {
             let alert = Service.createAlertController(title: "Error", message: error.localizedDescription)
@@ -47,6 +47,8 @@ class NumberAuthVC: UIViewController, UITextFieldDelegate {
             let vc = storyboard.instantiateViewController(identifier: "OtpVC") as! OtpVC
             vc.phoneLabel = self.numberLabel.text
             self.navigationController?.pushViewController(vc, animated: true)
+           
+            
         } else {
             let alert = Service.createAlertController(title: "Error", message: "Fill out the fields")
             self.present(alert, animated: true,completion: nil)

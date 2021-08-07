@@ -32,6 +32,21 @@ class AccountVC: UIViewController {
             return
         }
         
+      
+         print(uid)
+         print("ddfds")
+        let databaseRef = Database.database().reference()
+
+        databaseRef.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+
+            if snapshot.hasChild(self.phoneLabel.text!){
+                print("exist")
+             }else{
+                 print("does not exist")
+             }
+         })
+
+        
         Database.database().reference().child("users").child(uid).child("name").observeSingleEvent(of: .value) { (snapshot) in
             guard let name = snapshot.value as? String else { return }
            // guard let number = snapshot.value as? String else { return }
