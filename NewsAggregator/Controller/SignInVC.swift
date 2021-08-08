@@ -13,28 +13,30 @@ import FirebaseAuth
 
 class SignInVC: UIViewController, UITextFieldDelegate {
     
+    //MARK: - IB OUTLETS
     @IBOutlet weak var signInLabel: UILabel!
-    @IBOutlet weak var emailText: UILabel!
-    @IBOutlet weak var passwordText: UILabel!
     @IBOutlet weak var emailValue: UITextField!
     @IBOutlet weak var passwordValue: UITextField!
     @IBOutlet weak var loginText: UIButton!
     @IBOutlet weak var signupText: UIButton!
     
     
-    
     let userDefault = UserDefaults.standard
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        loginText.layer.cornerRadius = 20
-        signupText.layer.cornerRadius = 5
-        emailValue.delegate = self
-        passwordValue.delegate = self
-        self.hideKeyboardWhenTappedAround()
+        configureItems()
+        hideKeyboardWhenTappedAround()
     }
     
+    
+    func configureItems(){
+    loginText.layer.cornerRadius = 20
+    signupText.layer.cornerRadius = 5
+    emailValue.delegate = self
+    passwordValue.delegate = self
+    }
     //MARK: - HIDE NAV BAR
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,11 +48,9 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+    // MARK:- BUTTONS
     @IBAction func loginButton(_ sender: UIButton) {
-    
-       
-        self.signIn()
-        
+    signIn()
     }
     
     @IBAction func NumberAuthTapped(_ sender: Any) {
@@ -65,12 +65,14 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    //MARK:- ALERT
     func showAlert() {
         let alert = UIAlertController(title: "Error", message: "Fill out the fields.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
     
+    //MARK:- SIGN IN WITH EMAIL AND PASSWORD
     func signIn() {
      
 //        Auth.auth().signIn(withCustomToken: emailValue.text!) { (result, error) in
@@ -105,9 +107,9 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         
         
     }
-    
+    //MARK: - HIDES KEYBOARD ON TAPPING BUTTON
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        view.endEditing(true)
         return false
     }
     

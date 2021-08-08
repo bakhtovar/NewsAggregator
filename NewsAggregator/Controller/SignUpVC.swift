@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 
 class SignUpVC: UIViewController, UITextFieldDelegate {
-
+    //MARK: - IB OUTLETS
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var nameValue: UITextField!
     @IBOutlet weak var emailValue: UITextField!
@@ -19,33 +19,31 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureItems()
+        hideKeyboardWhenTappedAround()
+    }
+    // MARK: - IB BUTTON SIGN UP
+    @IBAction func registerButton(_ sender: Any) {
+        signUp()
+    }
+    
+    func configureItems() {
         registerText.layer.cornerRadius = 15
         nameValue.delegate = self
         emailValue.delegate = self
         passwordValue.delegate = self
         numberValue.delegate = self
-        self.hideKeyboardWhenTappedAround()
-    }
-
-    @IBAction func registerButton(_ sender: Any) {
-      
-        signUp()
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc: UIViewController = storyboard.instantiateViewController(identifier: "NumberAuthVC") as! NumberAuthVC
-//
-//        self.show(vc, sender: nil)
-        
     }
     
+    //MARK: - ALERT
     func showAlert() {
         let alert = UIAlertController(title: "Error", message: "Fill out the fields.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
     
+    //MARK:-SIGN UP
     func signUp (){
-        
         let name = nameValue.text
         let password = passwordValue.text
         let email = emailValue.text
@@ -60,11 +58,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                     self.present(alert, animated: true,completion: nil)
                 } else {
                     if let res = authResult {
-//                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                        let vc = storyboard.instantiateViewController(identifier: "NumberAuthVC") as! NumberAuthVC
-//                        print(vc)
-//                        self.present(vc, animated: true)
-
                         let ref  = Database.database().reference().child("users")
                         ref.child(res.user.uid).updateChildValues(["name" : name ?? "", "email": email ?? "", "number": number ?? ""])
                         
@@ -76,6 +69,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
             showAlert()
         }
     }
+    //MARK: - HIDES KEYBOARD ON TAPPING BUTTON
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false

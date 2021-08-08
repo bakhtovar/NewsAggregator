@@ -11,29 +11,34 @@ import FirebaseAuth
 
 class NumberAuthVC: UIViewController, UITextFieldDelegate {
 
+    //MARK:- IB OUTLETS
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var numberLabel: UITextField!
     @IBOutlet weak var buttonText: UIButton!
     
+    
     let userDefault = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureItems()
+    }
+    
+    func configureItems(){
         numberLabel.layer.cornerRadius = 20
         buttonText.layer.cornerRadius = 20
         numberLabel.delegate = self
     }
     
-
     @IBAction func buttonTapped(_ sender: UIButton) {
         signIn()
     }
     
+    
+    //MARK:- SENDING PHONE NUMBER
     func signIn() {
         guard let phone = numberLabel.text else {
             return
         }
-      
-            
         PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { verificationID, error in
             if let error = error {
             let alert = Service.createAlertController(title: "Error", message: error.localizedDescription)
@@ -56,14 +61,6 @@ class NumberAuthVC: UIViewController, UITextFieldDelegate {
         }
 
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }

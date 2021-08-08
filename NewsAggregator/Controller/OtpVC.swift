@@ -12,6 +12,7 @@ import Firebase
 
 class OtpVC: UIViewController, UITextFieldDelegate {
     
+    //MARK:- IB OUTLETS
     @IBOutlet weak var textOTP1: UITextField!
     @IBOutlet weak var textOTP2: UITextField!
     @IBOutlet weak var textOTP3: UITextField!
@@ -19,14 +20,20 @@ class OtpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textOTP5: UITextField!
     @IBOutlet weak var textOTP6: UITextField!
     @IBOutlet weak var loginOTP: UIButton!
+    
+    //MARK:- VARIABLES
     var emailLabel: String?
     var passwordLabel: String?
     var phoneLabel : String?
     var code : String?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureOTP()
+    }
+   
+    func configureOTP(){
         loginOTP.layer.cornerRadius = 10
         textOTP1.backgroundColor = UIColor.clear
         textOTP2.backgroundColor = UIColor.clear
@@ -57,15 +64,10 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         textOTP4.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
         textOTP5.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
         textOTP6.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
-//
-        
-       // getConsolidatedString()
-    //code = textFieldArray.compactMap{$0.text}.joined()
     }
    
-//
-   
 
+    // MARK:- MOVING COURSOR AROUND OTP
     @objc func textFieldDidChange(textField: UITextField){
         let text = textField.text
         if  text?.count == 1 {
@@ -106,6 +108,7 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+    //MARK:- BOTTOM BORDER FOR OTP
     func addBottomBorderTo(textField: UITextField) {
         let layer = CALayer()
         layer.backgroundColor = UIColor.gray.cgColor
@@ -114,6 +117,7 @@ class OtpVC: UIViewController, UITextFieldDelegate {
     }
                 
     
+    //MARK:- VERIFYING OTP
     @IBAction func loginButton(_ sender: UIButton) {
         let str = textOTP1.text! + textOTP2.text! + textOTP3.text! + textOTP4.text!
         code = str + textOTP5.text! + textOTP6.text!
@@ -121,14 +125,10 @@ class OtpVC: UIViewController, UITextFieldDelegate {
         guard let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") else { return }
         let credential: PhoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: otpCode)
         print(verificationID)
-        print("dd")
+        
         print(otpCode)
         let number = phoneLabel
-        print("ddd")
-        
         if code != nil {
-            
-      
             Auth.auth().signIn(with: credential) { (success, error) in
                 if (success != nil){
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)

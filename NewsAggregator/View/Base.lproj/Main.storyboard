@@ -458,10 +458,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your mail address" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="gWN-c6-rst">
-                                <rect key="frame" x="70" y="314.66666666666669" width="250" height="40"/>
+                                <rect key="frame" x="60" y="314.66666666666669" width="270" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="PIA-vC-eaU"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="tBv-BV-qkk"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="270" id="tBv-BV-qkk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
@@ -479,7 +479,6 @@
                                     <color key="titleShadowColor" red="0.24264131920000001" green="1" blue="0.51305311549999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="loginButton:" destination="hzr-ND-9Bd" eventType="touchUpInside" id="8EP-IN-cZo"/>
                                     <action selector="resetTapped:" destination="SdO-qG-Xid" eventType="touchUpInside" id="4eh-Gd-3gy"/>
                                 </connections>
                             </button>
@@ -498,7 +497,7 @@
                     <navigationItem key="navigationItem" id="cgu-Fk-U8L"/>
                     <connections>
                         <outlet property="emailLabel" destination="gWN-c6-rst" id="ncb-tL-izq"/>
-                        <outlet property="resetButton" destination="rv3-qc-o7i" id="8rk-9d-AUd"/>
+                        <outlet property="resetText" destination="9JN-eM-Bzw" id="Df2-W1-FLJ"/>
                         <outlet property="resetTitle" destination="Vd2-wZ-QH2" id="81D-kq-728"/>
                     </connections>
                 </viewController>
@@ -859,7 +858,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="vMk-pT-xmw"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" textContentType="name"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" textContentType="name"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter an email address" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="YRD-L5-4BQ">
                                                 <rect key="frame" x="45" y="325" width="300" height="40"/>
@@ -869,7 +868,7 @@
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="e39-zY-IYV"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="emailAddress" textContentType="email"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" textContentType="email"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="2jJ-4Z-MFq">
                                                 <rect key="frame" x="45" y="385" width="300" height="40"/>
@@ -879,7 +878,7 @@
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="t38-4S-A7k"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your number" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="zir-aK-ynR">
                                                 <rect key="frame" x="45" y="445" width="300" height="40"/>
@@ -889,7 +888,7 @@
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="qa0-wu-8ho"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" textContentType="tel"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" textContentType="tel"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snm-mm-doy">
                                                 <rect key="frame" x="110" y="535" width="170" height="40"/>

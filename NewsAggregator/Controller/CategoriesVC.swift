@@ -9,9 +9,12 @@ import UIKit
 
 class CategoriesVC: UIViewController {
     
+    
+    //MARK: - IB OUTLETS
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var myCollectionView: UICollectionView!
     
+    // MARK: - INSTANCE OF MODEL
     var category = CategoriesBrain()
     
     override func viewDidLoad() {
@@ -23,6 +26,8 @@ class CategoriesVC: UIViewController {
 
 extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    
+    // MARK:- TITTLE
     func configureNavbarAndSearchbar() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.title = "News by Category"
@@ -38,7 +43,6 @@ extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
         self.myCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
         
         //MARK: - REGISTER IS NEDEED FOR CELL(ITEM)
-       
         self.myCollectionView.register(UINib(nibName: "CategoryCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCell")
     }
     
@@ -113,6 +117,8 @@ extension CategoriesVC: UISearchBarDelegate {
             searchBar.text = ""
         }
     }
+    
+    //MARK: - SEARCHBAR TEXT
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         if searchBar.text != "" {
             return true
@@ -121,4 +127,5 @@ extension CategoriesVC: UISearchBarDelegate {
             return false
         }
     }
+    
 }

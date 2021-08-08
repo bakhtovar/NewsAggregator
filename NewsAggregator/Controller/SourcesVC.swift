@@ -57,6 +57,8 @@ extension SourcesVC :
     UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout {
     
+    
+    //MARK: - NUMBERS OF CELLS
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sources?.sources.count ?? 10
     }
@@ -97,7 +99,6 @@ extension SourcesVC :
     }
     
     //MARK: - SETTING SIZES
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding:CGFloat = 13
         let space: CGFloat = 10
@@ -121,6 +122,7 @@ extension SourcesVC :
 
 extension SourcesVC: UISearchBarDelegate {
     
+    //MARK: - STARTS SEARCH WHEN TEXT IS EXISTS
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             guard !searchText.isEmpty  else {
                 sources?.sources = filteredData!.sources
@@ -128,11 +130,9 @@ extension SourcesVC: UISearchBarDelegate {
                 return
             }
         //MARK: -  FILTERING THE ARRAY BY SOURCE.NAME
-      
         sources?.sources = (filteredData?.sources.filter({ source -> Bool in
             (source.name?.lowercased().contains(searchText.lowercased()))!
         }))!
         sourcesCollectionView.reloadData()
-        
     }
 }

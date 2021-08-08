@@ -9,24 +9,37 @@ import Foundation
 import UIKit
 import SkeletonView
 import Kingfisher
+import CoreData
 
 
 class CategoryVC: UIViewController  {
+    
+    //MARK: - INSTANCE OF MODEL
     var articles: Articles?
+    var catPass: PassUrl!
+    var bookmarks = [Bookmarks]()
+    
+    let const = K()
+    
+    // MARK: - VARIABLES
     var titleName: String?
     var urlString: String?
     var sourceId : String?
     var labelText: String?
     var pageNumber: Int = 1
     var sourceName: String?
-    var catPass: PassUrl!
-    var total = 4
+    
+    
     
     var refresh = UIRefreshControl()
     
     @IBOutlet weak var myTableView: UITableView!
     
+    let context = (UIApplication.shared.delegate as!
+                    AppDelegate).persistentContainer.viewContext
+    
     override func viewDidLoad() {
+      
         super.viewDidLoad()
         myTableView.delegate = self
         myTableView.dataSource = self
@@ -54,6 +67,22 @@ class CategoryVC: UIViewController  {
         catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)
         
         
+        func fetchData() {
+            let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
+            do {
+                let bookmarks = try context.fetch(fetchRequest)
+                self.bookmarks = bookmarks
+                myTableView.reloadData()
+            } catch {}
+        }
+
+      
+
+         func viewWillAppear(_ animated: Bool) {
+                super.viewWillAppear(animated)
+                fetchData()
+            }
+        
         //MARK: - GETTING DATA FROM JSON
         APICall.shared.fetchData(category: catPass) { (response) in
             DispatchQueue.main.async {
@@ -71,6 +100,8 @@ class CategoryVC: UIViewController  {
             }
         }
     }
+    
+    
     //MARK: - REFRESHING FUNC
     @objc func refreshData (refreshControl: UIRefreshControl) {
         
@@ -101,7 +132,7 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
     }
     //MARK: - ADDING DATA TO AN EMPTY CELL
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if  pageNumber < total && indexPath.row + 1 == (articles?.articles.count ?? 2) && articles?.articles.count ?? 2 >= 19 {
+        if  pageNumber < const.total && indexPath.row + 1 == (articles?.articles.count ?? 2) && articles?.articles.count ?? 2 >= const.totalPage {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SpinnerCell", for: indexPath) as! SpinnerCell
             return cell
         } else {
@@ -129,7 +160,7 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
     // MARK: - UPDATING THE PAGE INT WHEN TABLEVIEW REACHES THE BOTTOM
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastItem = (articles?.articles.count ?? 2)
-        if  pageNumber < total && indexPath.row + 1 == lastItem && articles?.articles.count ?? 2 >= 19 {
+        if  pageNumber < const.total && indexPath.row + 1 == lastItem && articles?.articles.count ?? 2 >= const.totalPage {
             pageNumber += 1
             catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)
             
@@ -142,6 +173,7 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
         }
     }
     
+    //MARK: - SENDING DATA TO WEBVIEWVC
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -154,6 +186,8 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    
+    //MARK:- CELL'S HEIGHT
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }

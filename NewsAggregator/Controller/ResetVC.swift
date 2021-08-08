@@ -9,23 +9,26 @@ import UIKit
 import Firebase
 class ResetVC: UIViewController, UITextFieldDelegate {
     
+    //MARK: - IB OUTLETS
     @IBOutlet weak var resetTitle: UILabel!
     @IBOutlet weak var emailLabel: UITextField!
-    @IBOutlet weak var resetButton: NSLayoutConstraint!
+    @IBOutlet weak var resetText: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.emailLabel.delegate = self
-        resetTitle.layer.cornerRadius = 5
+        resetText.layer.cornerRadius = 10
     }
+    
     func textFieldShouldReturn(_ emailLabel: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
-        //scrollView.setContentOffset(point, animated: true)
+        
     }
 
+    //MARK:- RESET TAPPING
     @IBAction func resetTapped(_ sender: Any) {
         let auth = Auth.auth()
-        
         auth.sendPasswordReset(withEmail: emailLabel.text ?? "") { (error) in
             if let error = error {
                 let alert = Service.createAlertController(title: "Error", message: error.localizedDescription)
@@ -33,7 +36,6 @@ class ResetVC: UIViewController, UITextFieldDelegate {
                 
                 return
             }
-            
             let alert = Service.createAlertController(title: "Done", message: "A password has been sent to your email.")
             self.present(alert, animated: true,completion: nil)
         }

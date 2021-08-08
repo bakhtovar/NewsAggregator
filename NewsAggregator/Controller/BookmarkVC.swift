@@ -9,16 +9,17 @@ import UIKit
 import CoreData
 
 class BookmarkVC: UIViewController {
-    
+    //MARK: - VARIABLES
     var titleName: String?
     var urlString: String?
     var sourceId : String?
     var labelText: String?
     var sourceName: String?
-    var bookmarks = [Bookmarks]()
     var messageLabel: UILabel?
     
+    var bookmarks = [Bookmarks]()
     
+    //MARK: - OB OUTLET
     @IBOutlet weak var table: UITableView!
     
     let context = (UIApplication.shared.delegate as!
@@ -26,13 +27,16 @@ class BookmarkVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTable()
+        
+    }
+    
+    func configureTable(){
         title = "Bookmarks"
         table.delegate = self
         table.dataSource = self
         table.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "articleCell")
-        
     }
-    
     // MARK: - NAVIGATION
     
     func fetchData() {
@@ -53,13 +57,12 @@ class BookmarkVC: UIViewController {
 
 extension BookmarkVC: UITableViewDelegate,  UITableViewDataSource {
     
+    //MARK:- CHECKS FOR BOOKMARK EXISTENCE
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.bookmarks.count > 0 {
             table.backgroundView = nil
             return self.bookmarks.count
            } else {
-            print(bookmarks.count)
-            print("fff")
             let emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
             emptyLabel.text = "There is no bookmark added."
             emptyLabel.textAlignment = NSTextAlignment.center
@@ -69,11 +72,10 @@ extension BookmarkVC: UITableViewDelegate,  UITableViewDataSource {
            }
     }
     
+    
+    //MARK: - PRESENT DATA
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! ArticleCell
-        
         let article = bookmarks[indexPath.row]
         if article.urlToImage == nil {
             cell.imageIcon.isHidden = true
@@ -87,14 +89,16 @@ extension BookmarkVC: UITableViewDelegate,  UITableViewDataSource {
         if let image = URL(string: article.urlToImage ?? "") {
             cell.imageIcon.kf.setImage(with: image, placeholder: nil)
         }
-        
-       
         return cell
     }
+    
+    //MARK: - CELL'S SIZE
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
+    //MARK: - SENDING DATA
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -107,11 +111,12 @@ extension BookmarkVC: UITableViewDelegate,  UITableViewDataSource {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    
+    //MARK: - SWIPE TO DELETE
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
         if(editingStyle == UITableViewCell.EditingStyle.delete){
             let personToRemove = self.bookmarks[indexPath.row]
             self.context.delete(personToRemove)
-            
             do {
                 try self.context.save()
             } catch {

@@ -15,5 +15,15 @@ struct K {
    static let APIKey = "068d0bb8e68442748294d69dbef71e6f"
     
     static let url = "https://newsapi.org/v2/"
+    var total = 4
+    var totalPage = 19
+    var generalURL = "https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=\(APIKey)"
+    var businessURL = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=\(APIKey)"
+    var scienceURL = "https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=\(APIKey)"
+    var techURL = "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=\(APIKey)"
+    var healthURL = "https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=\(APIKey)"
+    var entertainmentURL = "https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=\(APIKey)"
+    var sportsURL = "https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=\(APIKey)"
+
 }
 

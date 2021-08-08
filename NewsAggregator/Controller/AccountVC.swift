@@ -12,13 +12,15 @@ import SwiftGifOrigin
 
 class AccountVC: UIViewController {
     
-  //MARK: -  REFERING TO DATABASE
-   var ref = Database.database().reference(fromURL: "news-acae1-default-rtdb.firebaseio.com/")
+   //MARK: -  REFERING TO DATABASE
+    var ref = Database.database().reference(fromURL: "news-acae1-default-rtdb.firebaseio.com/")
     var currentName : String?
     
+    //MARK: - IB OUTLETS
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var phoneLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
@@ -32,13 +34,9 @@ class AccountVC: UIViewController {
             return
         }
         
-      
-         print(uid)
-         print("ddfds")
         let databaseRef = Database.database().reference()
-
         databaseRef.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
-
+            
             if snapshot.hasChild(self.phoneLabel.text!){
                 print("exist")
              }else{
@@ -49,7 +47,6 @@ class AccountVC: UIViewController {
         
         Database.database().reference().child("users").child(uid).child("name").observeSingleEvent(of: .value) { (snapshot) in
             guard let name = snapshot.value as? String else { return }
-           // guard let number = snapshot.value as? String else { return }
             self.userName.text = "Hi, \(name)"
             UIView.animate(withDuration: 0.5) {
                 self.userName.alpha = 1
@@ -66,7 +63,7 @@ class AccountVC: UIViewController {
         
     }
 
-    
+    //MARK: - LOG OUT
     @IBAction func logOutPressed(_ sender: Any) {
         tabBarController?.tabBar.isHidden = true
         let firebaseAuth = Auth.auth()
