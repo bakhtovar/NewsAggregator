@@ -19,6 +19,8 @@ class CategoryVC: UIViewController  {
     var catPass: PassUrl!
     var bookmarks = [Bookmarks]()
     
+    var news = [News]()
+    
     let const = K()
     
     // MARK: - VARIABLES
@@ -28,65 +30,52 @@ class CategoryVC: UIViewController  {
     var labelText: String?
     var pageNumber: Int = 1
     var sourceName: String?
-    
-    
-    
     var refresh = UIRefreshControl()
     
+    
+    //MARK:- IB  OUTLET
     @IBOutlet weak var myTableView: UITableView!
     
+    //MARK: - CORE DATA
     let context = (UIApplication.shared.delegate as!
                     AppDelegate).persistentContainer.viewContext
+    let saveContent: () = (UIApplication.shared.delegate as!
+                            AppDelegate).saveContext()
+    
     
     override func viewDidLoad() {
       
         super.viewDidLoad()
-        myTableView.delegate = self
-        myTableView.dataSource = self
         
-        myTableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "articleCell")
-        myTableView.register(UINib(nibName: "SpinnerCell", bundle: nil), forCellReuseIdentifier: "SpinnerCell")
-        
+        configureTable()
+       
+        //MARK:- ASSIGNING TITLE
         if titleName != nil {
             self.title = titleName
         } else {
             self.title = sourceName
         }
-        //MARK: - PULL TO REFRESH
         
-        refresh.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        myTableView?.addSubview(refresh)
+        //MARK: - PULL TO REFRESH
+        pullToRefresh()
         
         //MARK: - USAGE OF SKELETON
-        myTableView.isSkeletonable = true
-        myTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .emerald), animation: nil, transition: .crossDissolve(0.25))
-        myTableView.startSkeletonAnimation()
-        myTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .emerald), animation: nil, transition: .crossDissolve(0.25))
+        skeletonUsage()
         
+        
+        //MARK:- MAKING INSTANCE OF MODEL PASS URL
         catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)
         
-        
-        func fetchData() {
-            let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
-            do {
-                let bookmarks = try context.fetch(fetchRequest)
-                self.bookmarks = bookmarks
-                myTableView.reloadData()
-            } catch {}
-        }
+        fetchData()
 
-      
-
-         func viewWillAppear(_ animated: Bool) {
-                super.viewWillAppear(animated)
-                fetchData()
-            }
-        
         //MARK: - GETTING DATA FROM JSON
         APICall.shared.fetchData(category: catPass) { (response) in
             DispatchQueue.main.async {
                 self.articles = response
+                self.news = self.articles!.articles as! [News]
+                
+                saveUserData(self.news)
+                print(self.news)
                 self.myTableView.reloadData()
                 self.myTableView.stopSkeletonAnimation()
                 self.myTableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
@@ -101,6 +90,40 @@ class CategoryVC: UIViewController  {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           fetchData()
+   }
+    
+    func fetchData() {
+        let fetchRequest: NSFetchRequest<Bookmarks> = Bookmarks.fetchRequest()
+        do {
+            let bookmarks = try context.fetch(fetchRequest)
+            self.bookmarks = bookmarks
+            myTableView.reloadData()
+        } catch {}
+    }
+    
+    func configureTable() {
+        myTableView.delegate = self
+        myTableView.dataSource = self
+        myTableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "articleCell")
+        myTableView.register(UINib(nibName: "SpinnerCell", bundle: nil), forCellReuseIdentifier: "SpinnerCell")
+        
+    }
+    func pullToRefresh() {
+        refresh.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        myTableView?.addSubview(refresh)
+        
+    }
+    
+    func skeletonUsage() {
+        myTableView.isSkeletonable = true
+        myTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .emerald), animation: nil, transition: .crossDissolve(0.25))
+        myTableView.startSkeletonAnimation()
+        myTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .emerald), animation: nil, transition: .crossDissolve(0.25))
+    }
     
     //MARK: - REFRESHING FUNC
     @objc func refreshData (refreshControl: UIRefreshControl) {
