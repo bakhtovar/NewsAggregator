@@ -19,7 +19,7 @@ class BookmarkVC: UIViewController {
     
     var bookmarks = [Bookmarks]()
     
-    //MARK: - OB OUTLET
+    //MARK: - IB OUTLET
     @IBOutlet weak var table: UITableView!
     
     let context = (UIApplication.shared.delegate as!

@@ -37,6 +37,8 @@ class APICall {
                     do {
                         let result = try JSONDecoder().decode(Articles.self, from: data!)
                         completion(result)
+                        
+                        
                     }
                     catch {
                         print("Error. Try Again")

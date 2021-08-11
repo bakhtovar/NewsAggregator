@@ -165,7 +165,6 @@
 				D3B36127267B2BEA002DB248 /* LaunchScreen.storyboard */,
 				D3B3612A267B2BEA002DB248 /* Info.plist */,
 				D309657B26B003E0001F9A6B /* Service.swift */,
-				D3A6A83C26C166A000A7ABEF /* DBModel.swift */,
 			);
 			path = NewsAggregator;
 			sourceTree = "<group>";
@@ -173,6 +172,7 @@
 		D3B36132267B2C28002DB248 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D3A6A83C26C166A000A7ABEF /* DBModel.swift */,
 				D3B36144267B397A002DB248 /* CategoryModel.swift */,
 				D3352EFE267BD7C4004103DC /* ArticleModel.swift */,
 				D3352F01267BD984004103DC /* APICall.swift */,
