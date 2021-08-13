@@ -2,7 +2,7 @@
 //  News+CoreDataClass.swift
 //  NewsAggregator
 //
-//  Created by Bakhtovar Umarov on 09/08/21.
+//  Created by Bakhtovar Umarov on 12/08/21.
 //
 //
 

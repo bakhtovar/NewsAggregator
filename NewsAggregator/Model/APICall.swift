@@ -37,7 +37,7 @@ class APICall {
                     do {
                         let result = try JSONDecoder().decode(Articles.self, from: data!)
                         completion(result)
-                        
+                        print(url)
                         
                     }
                     catch {

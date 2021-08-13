@@ -13,6 +13,7 @@ class CategoryVC: UIViewController {
   //MARK: - INSTANCE OF MODEL
   var articles: Articles?
   var catPass: PassUrl!
+
   var bookmarks = [Bookmarks]()
   var news = [News]()
   let const = K()
@@ -24,6 +25,7 @@ class CategoryVC: UIViewController {
   var labelText: String?
   var pageNumber: Int = 1
   var sourceName: String?
+  var buttonId: String?
   var refresh = UIRefreshControl()
   //MARK:- IB OUTLET
   @IBOutlet weak var myTableView: UITableView!
@@ -33,10 +35,13 @@ class CategoryVC: UIViewController {
   let saveContent: () = (UIApplication.shared.delegate as!
               AppDelegate).saveContext()
   override func viewDidLoad() {
-    
-    
+    let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+    print(paths[0])
+
     
     super.viewDidLoad()
+    
+    
     configureTable()
     //MARK:- ASSIGNING TITLE
     if titleName != nil {
@@ -50,23 +55,26 @@ class CategoryVC: UIViewController {
     skeletonUsage()
     //MARK:- MAKING INSTANCE OF MODEL PASS URL
     catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)
+    
+    //btnId = ButtonID(btnId: buttonId!)
    //
    // fetchData()
     //MARK: - GETTING DATA FROM JSON
     
    
     APICall.shared.fetchData(category: catPass) { (response) in
-      DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
         //fetch()
         
         self.articles = response
-      
-        for i in 0..<(self.articles?.articles.count)! {
-            self.dbModel.saveUserData(self.articles?.articles[i].title ?? "", urls: self.articles?.articles[i].url ?? "", imageURL: self.articles?.articles[i].urlToImage ?? "", source: self.articles?.articles[i].source.name ?? "")
-        }
+            //print(articles)
+            print("ddddddd")
+            print(response)
+        
+            dbModel.saveUserData(art: articles!.articles)
  
         //print(self.news)
-    //    self.myTableView.reloadData()
+    // self.myTableView.reloadData() 
         
         self.myTableView.stopSkeletonAnimation()
         self.myTableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
@@ -81,24 +89,31 @@ class CategoryVC: UIViewController {
     }
   }
     
-    func fetchData() {
+    
+    func fetchData(id: String) {
         let fetchRequest: NSFetchRequest<News> = News.fetchRequest()
         do {
+            fetchRequest.predicate = NSPredicate(format: "idButton = %@", id)
             let news = try context.fetch(fetchRequest)
+            print(id)
             self.news = news
+            print(News.self)
             myTableView.reloadData()
             myTableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
            
         } catch {}
     }
 
+    
    
     
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            fetchData()
+            fetchData(id: buttonId!)
         }
 
+  
+    
     
   func configureTable() {
     myTableView.delegate = self
@@ -120,7 +135,7 @@ class CategoryVC: UIViewController {
   //MARK: - REFRESHING FUNC
   @objc func refreshData (refreshControl: UIRefreshControl) {
     catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)
-    APICall.shared.fetchData(category: catPass) { (response) in
+    APICall.shared.fetchData( category: catPass) { (response) in
       DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
         self.articles = response
         self.myTableView.reloadData()
@@ -129,6 +144,8 @@ class CategoryVC: UIViewController {
     }
   }
 }
+
+
 extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return news.count
@@ -154,14 +171,14 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
         print(news.count)
         print("here it is")
         
-        let article = news[indexPath.row]
-        //let article = articles?.articles[indexPath.row]
+       // let article = news[indexPath.row]
+        let article = articles?.articles[indexPath.row]
         if article.imageUrl == nil {
           cell.imageIcon.isHidden = true
           cell.imageWidth.constant = 0
         }
         cell.titleLabel.text = article.titleName
-        cell.urlLabel.text = article.sourceName
+        cell.urlLabel.text = article?.source.na
         cell.imageIcon.kf.indicatorType = .activity
         if let image = URL(string: article.imageUrl ?? "") {
           cell.imageIcon.kf.setImage(with: image, placeholder: nil)
@@ -176,7 +193,7 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
     if pageNumber < const.total && indexPath.row + 1 == lastItem && articles?.articles.count ?? 2 >= const.totalPage {
       pageNumber += 1
       catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)
-      APICall.shared.fetchData(category: catPass) { (response) in
+        APICall.shared.fetchData(category: catPass) { (response) in
         DispatchQueue.main.async {
           self.articles?.articles.append(contentsOf: response.self.articles)
           self.myTableView.reloadData()

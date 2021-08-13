@@ -140,7 +140,7 @@ class OtpVC: UIViewController, UITextFieldDelegate {
                     ref.child(success!.user.uid).setValue([ "number": number ?? ""])
                 } else {
                     let alert = Service.createAlertController(title: "Error", message: error!.localizedDescription)
-                    self.present(alert, animated: true,completion: nil)
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }

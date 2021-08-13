@@ -87,6 +87,7 @@ extension CategoriesVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
         vc.titleName = tappedCategory.nameLabel
         vc.urlString = tappedCategory.url
         vc.labelText = searchBar.text
+        vc.buttonId = tappedCategory.catId
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

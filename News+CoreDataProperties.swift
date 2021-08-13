@@ -2,7 +2,7 @@
 //  News+CoreDataProperties.swift
 //  NewsAggregator
 //
-//  Created by Bakhtovar Umarov on 09/08/21.
+//  Created by Bakhtovar Umarov on 12/08/21.
 //
 //
 
@@ -16,10 +16,11 @@ extension News {
         return NSFetchRequest<News>(entityName: "News")
     }
 
-    @NSManaged public var linkUrl: String?
+    @NSManaged public var idButton: String?
     @NSManaged public var imageUrl: String?
-    @NSManaged public var titleName: String?
+    @NSManaged public var linkUrl: String?
     @NSManaged public var sourceName: String?
+    @NSManaged public var titleName: String?
 
 }
 
