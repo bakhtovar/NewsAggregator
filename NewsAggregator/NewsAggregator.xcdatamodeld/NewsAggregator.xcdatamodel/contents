@@ -17,14 +17,21 @@
         <attribute name="linkUrl" optional="YES" attributeType="String"/>
         <attribute name="sourceName" optional="YES" attributeType="String"/>
         <attribute name="titleName" optional="YES" attributeType="String"/>
+        <relationship name="sources" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sources"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="idButton"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="Sources" representedClassName="Sources" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="news" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="News"/>
+    </entity>
     <elements>
         <element name="Bookmarks" positionX="-63" positionY="-18" width="128" height="89"/>
-        <element name="News" positionX="-36" positionY="36" width="128" height="104"/>
+        <element name="News" positionX="-36" positionY="36" width="128" height="119"/>
+        <element name="Sources" positionX="-45" positionY="45" width="128" height="74"/>
     </elements>
 </model>

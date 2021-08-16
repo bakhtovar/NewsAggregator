@@ -36,6 +36,7 @@ class APICall {
                 if error == nil && data != nil {
                     do {
                         let result = try JSONDecoder().decode(Articles.self, from: data!)
+    
                         completion(result)
                         print(url)
                         

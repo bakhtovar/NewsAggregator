@@ -39,8 +39,14 @@ class CategoryVC: UIViewController {
     print(paths[0])
 
     
+   
     super.viewDidLoad()
-    
+//
+//    if Reachability.isConnectedToNetwork(){
+//        print("Internet Connection Available!")
+//    } else{
+//        print("Internet Connection not Available!")
+//    }
     
     configureTable()
     //MARK:- ASSIGNING TITLE
@@ -64,18 +70,10 @@ class CategoryVC: UIViewController {
    
     APICall.shared.fetchData(category: catPass) { (response) in
         DispatchQueue.main.async { [self] in
-        //fetch()
-        
-        self.articles = response
-            //print(articles)
-            print("ddddddd")
-            print(response)
-        
-            dbModel.saveUserData(art: articles!.articles)
- 
-        //print(self.news)
-    // self.myTableView.reloadData() 
-        
+            self.articles = response
+           
+        //dbModel.saveUserData(art: response )
+            
         self.myTableView.stopSkeletonAnimation()
         self.myTableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
         if self.labelText != "" && self.sourceName == nil && self.titleName == nil {
@@ -97,7 +95,7 @@ class CategoryVC: UIViewController {
             let news = try context.fetch(fetchRequest)
             print(id)
             self.news = news
-            print(News.self)
+//            print(News.self)
             myTableView.reloadData()
             myTableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
            
@@ -112,8 +110,6 @@ class CategoryVC: UIViewController {
             fetchData(id: buttonId!)
         }
 
-  
-    
     
   func configureTable() {
     myTableView.delegate = self
@@ -160,7 +156,7 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     
-   
+    
     if pageNumber < const.total && indexPath.row + 1 == (news.count) && news.count >= const.totalPage {
       let cell = tableView.dequeueReusableCell(withIdentifier: "SpinnerCell", for: indexPath) as! SpinnerCell
       return cell
@@ -168,17 +164,17 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! ArticleCell
         
         print("here it is")
-        print(news.count)
+        print(news)
         print("here it is")
         
-       // let article = news[indexPath.row]
-        let article = articles?.articles[indexPath.row]
+        let article = news[indexPath.row]
+        //let article = articles?.articles[indexPath.row]
         if article.imageUrl == nil {
           cell.imageIcon.isHidden = true
           cell.imageWidth.constant = 0
         }
         cell.titleLabel.text = article.titleName
-        cell.urlLabel.text = article?.source.na
+        cell.urlLabel.text = article.sourceName
         cell.imageIcon.kf.indicatorType = .activity
         if let image = URL(string: article.imageUrl ?? "") {
           cell.imageIcon.kf.setImage(with: image, placeholder: nil)
