@@ -2,13 +2,20 @@
 //  News+CoreDataProperties.swift
 //  NewsAggregator
 //
-//  Created by Bakhtovar Umarov on 12/08/21.
+//  Created by Bakhtovar Umarov on 17/08/21.
 //
 //
 
 import Foundation
 import CoreData
 
+struct ArticleCoreData: Codable {
+   // let source: Source_
+    let title: String?
+    let url : String?
+    let urlToImage: String?
+    
+}
 
 extension News {
 
@@ -16,11 +23,24 @@ extension News {
         return NSFetchRequest<News>(entityName: "News")
     }
 
-    @NSManaged public var idButton: String?
-    @NSManaged public var imageUrl: String?
-    @NSManaged public var linkUrl: String?
-    @NSManaged public var sourceName: String?
-    @NSManaged public var titleName: String?
+    @NSManaged public var title: String?
+    @NSManaged public var url: String?
+    @NSManaged public var urlToImage: String?
+    @NSManaged public var sources: SourcesData?
+    
+    
+    
+    var allAtributes : ArticleCoreData {
+            get {
+                return ArticleCoreData(title: self.title, url: self.url, urlToImage: self.urlToImage)
+            }
+            set {
+                self.title = newValue.title
+                self.url = newValue.url
+                self.urlToImage = newValue.urlToImage
+               // self.sources?.name = newValue.source.name
+            }
+        }
 
 }
 

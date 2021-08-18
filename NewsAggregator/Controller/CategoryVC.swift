@@ -169,14 +169,14 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
         
         let article = news[indexPath.row]
         //let article = articles?.articles[indexPath.row]
-        if article.imageUrl == nil {
+        if article.urlToImage == nil {
           cell.imageIcon.isHidden = true
           cell.imageWidth.constant = 0
         }
-        cell.titleLabel.text = article.titleName
-        cell.urlLabel.text = article.sourceName
+        cell.titleLabel.text = article.title
+        cell.urlLabel.text = article.sources?.name
         cell.imageIcon.kf.indicatorType = .activity
-        if let image = URL(string: article.imageUrl ?? "") {
+        if let image = URL(string: article.urlToImage ?? "") {
           cell.imageIcon.kf.setImage(with: image, placeholder: nil)
         }
       
