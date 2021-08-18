@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SkeletonView
+import CoreData
 
 class SourcesVC: UIViewController {
     @IBOutlet weak var sourcesSearch: UISearchBar!
@@ -17,11 +18,17 @@ class SourcesVC: UIViewController {
     // MARK: - MAKING AN INSTANCE OF STRUCTS
     var category = CategoriesBrain()
     var sources: Sources?
-    
+    var sourcesDB = [SourceDB]()
+    let dbObject = SourcesDBModel()
     //MARK: - CREATE A COPY FOR FILTERING
     var filteredData: Sources?
     
+    let context = (UIApplication.shared.delegate as!
+                AppDelegate).persistentContainer.viewContext
+        let saveContent: () = (UIApplication.shared.delegate as!
+                    AppDelegate).saveContext()
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         configureNavbarAndSearchBar()
         configureCollectionView()
@@ -30,10 +37,32 @@ class SourcesVC: UIViewController {
         APICall.shared.getSources { (response) in
             DispatchQueue.main.async {
                 self.sources = response
+                
+                for i in 0..<(self.sources?.sources.count)! {
+                    self.dbObject.saveSourceData(self.sources?.sources[i].id ?? "" , name: self.sources?.sources[i].name ?? "", category: self.sources?.sources[i].category ?? "" )
+                      }
                 self.filteredData = response
                 self.sourcesCollectionView.reloadData()
             }
         }
+        
+      
+    }
+
+    
+        func fetchData () {
+         //   let fetchRequest: NSFetchRequest<SourceDB> = SourceDB.fetchRequest()
+            let fetchRequest = NSFetchRequest<SourceDB>(entityName: "SourceDB")
+            do {
+                let sourceModel = try context.fetch(fetchRequest)
+                self.sourcesDB = sourceModel
+                sourcesCollectionView.reloadData()
+            } catch {}
+        }
+
+
+    override func viewWillAppear(_ animated: Bool) {
+        fetchData()
     }
     
     func configureCollectionView() {
@@ -56,19 +85,23 @@ extension SourcesVC :
     UICollectionViewDataSource,
     UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout {
-    
+  
     
     //MARK: - NUMBERS OF CELLS
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sources?.sources.count ?? 10
+        return sourcesDB.count
     }
     
     //MARK: - ASSIGNING THE DATA
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        
+        
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SourcesCell", for: indexPath) as! SourcesCell
-        let vc = sources?.sources[indexPath.row]
-        cell.sourceTitleLabel.text = vc?.name
-        cell.categoryTittleLabel.text = vc?.category?.capitalized
+        let vc = sourcesDB[indexPath.row]
+        cell.sourceTitleLabel.text = vc.name
+        cell.categoryTittleLabel.text = vc.category?.capitalized
         
         switch cell.categoryTittleLabel.text?.lowercased() {
         case "general":
@@ -110,12 +143,12 @@ extension SourcesVC :
     
     //MARK: - SENDING DATA TO THE CATEGORYVC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let tappedCategory = sources?.sources[indexPath.row]
+        let tappedCategory = sourcesDB[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let vc = storyboard.instantiateViewController(identifier: "CategoryVC") as! CategoryVC
-        vc.sourceName = tappedCategory?.name
-        vc.sourceId = tappedCategory?.id
+        vc.sourceName = tappedCategory.name
+        vc.sourceId = tappedCategory.id
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -49,7 +49,7 @@ class SourcesDBModel: NSManagedObject {
     func saveSourceData(_ id:String, name:String, category:String) {
       let context = (UIApplication.shared.delegate as!
               AppDelegate).persistentContainer.viewContext
-        let newArticle = NSEntityDescription.insertNewObject(forEntityName: "News", into: context)
+        let newArticle = NSEntityDescription.insertNewObject(forEntityName: "SourceDB", into: context)
         newArticle.setValue(id, forKey: "id")
         newArticle.setValue(name, forKey: "name")
         newArticle.setValue(category, forKey: "category")
@@ -61,6 +61,19 @@ class SourcesDBModel: NSManagedObject {
             print("Errorr: \(error.localizedDescription)")
            }
          }
+    func fetch() {
+       let appDelegate = UIApplication.shared.delegate as! AppDelegate
+       let context = appDelegate.persistentContainer.viewContext
+       let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "SourceDB")
+       do {
+        let result = try context.fetch(fetch)
+        for data in result as! [NSManagedObject] {
+         print(data.value(forKey: "name") as! String)
+        }
+       } catch {
+        print("Failed")
+       }
+     }
 }
 
 
