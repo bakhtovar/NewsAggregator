@@ -26,6 +26,7 @@ extension News {
     @NSManaged public var title: String?
     @NSManaged public var url: String?
     @NSManaged public var urlToImage: String?
+    @NSManaged public var idButton: String?
     @NSManaged public var sources: SourcesData?
     
     

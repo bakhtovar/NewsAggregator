@@ -52,13 +52,6 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     @IBAction func loginButton(_ sender: UIButton) {
     signIn()
     }
-    
-    @IBAction func NumberAuthTapped(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "NumberAuthVC") as! NumberAuthVC
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
     @IBAction func signUpButton(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc: UIViewController = storyboard.instantiateViewController(identifier: "SignUpVC") as! SignUpVC

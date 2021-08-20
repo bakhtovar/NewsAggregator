@@ -35,19 +35,7 @@ class CategoryVC: UIViewController {
   let saveContent: () = (UIApplication.shared.delegate as!
               AppDelegate).saveContext()
   override func viewDidLoad() {
-    let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-    print(paths[0])
-
-    
-   
     super.viewDidLoad()
-//
-//    if Reachability.isConnectedToNetwork(){
-//        print("Internet Connection Available!")
-//    } else{
-//        print("Internet Connection not Available!")
-//    }
-    
     configureTable()
     //MARK:- ASSIGNING TITLE
     if titleName != nil {
@@ -62,18 +50,10 @@ class CategoryVC: UIViewController {
     //MARK:- MAKING INSTANCE OF MODEL PASS URL
     catPass = PassUrl(categoryName: titleName ?? "", id: sourceId, searchText: labelText, pageInt: pageNumber)
     
-    //btnId = ButtonID(btnId: buttonId!)
-   //
-   // fetchData()
     //MARK: - GETTING DATA FROM JSON
-    
-   
     APICall.shared.fetchData(category: catPass) { (response) in
         DispatchQueue.main.async { [self] in
             self.articles = response
-           
-        //dbModel.saveUserData(art: response )
-            
         self.myTableView.stopSkeletonAnimation()
         self.myTableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
         if self.labelText != "" && self.sourceName == nil && self.titleName == nil {
@@ -88,27 +68,24 @@ class CategoryVC: UIViewController {
   }
     
     
-    func fetchData(id: String) {
-        let fetchRequest: NSFetchRequest<News> = News.fetchRequest()
-        do {
-            fetchRequest.predicate = NSPredicate(format: "idButton = %@", id)
-            let news = try context.fetch(fetchRequest)
-            print(id)
-            self.news = news
-//            print(News.self)
-            myTableView.reloadData()
-            myTableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-           
-        } catch {}
-    }
-
-    
-   
-    
-    override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            fetchData(id: buttonId!)
-        }
+//    func fetchData(id: String) {
+//        let fetchRequest: NSFetchRequest<News> = News.fetchRequest()
+//        do {
+//            fetchRequest.predicate = NSPredicate(format: "idButton = %@", id)
+//            let news = try context.fetch(fetchRequest)
+//            print(id)
+//            self.news = news
+////            print(News.self)
+//            myTableView.reloadData()
+//            myTableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+//
+//        } catch {}
+//    }
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//            super.viewWillAppear(animated)
+//            fetchData(id: buttonId!)
+//        }
 
     
   func configureTable() {
@@ -144,10 +121,10 @@ class CategoryVC: UIViewController {
 
 extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return news.count
+    return articles?.articles.count ?? 10
   }
   func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return news.count
+    return articles?.articles.count ?? 10 
   }
   func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
     return "articleCell"
@@ -155,28 +132,22 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
   //MARK: - ADDING DATA TO AN EMPTY CELL
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    
-    
-    if pageNumber < const.total && indexPath.row + 1 == (news.count) && news.count >= const.totalPage {
+    if pageNumber < const.total && indexPath.row + 1 == (articles?.articles.count) && (articles?.articles.count) ?? 10  >= const.totalPage {
       let cell = tableView.dequeueReusableCell(withIdentifier: "SpinnerCell", for: indexPath) as! SpinnerCell
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! ArticleCell
         
-        print("here it is")
-        print(news)
-        print("here it is")
-        
-        let article = news[indexPath.row]
-        //let article = articles?.articles[indexPath.row]
-        if article.urlToImage == nil {
+       // let article = news[indexPath.row]
+        let article = articles?.articles[indexPath.row]
+        if article?.urlToImage == nil {
           cell.imageIcon.isHidden = true
           cell.imageWidth.constant = 0
         }
-        cell.titleLabel.text = article.title
-        cell.urlLabel.text = article.sources?.name
+        cell.titleLabel.text = article?.title
+        cell.urlLabel.text = article?.source.name
         cell.imageIcon.kf.indicatorType = .activity
-        if let image = URL(string: article.urlToImage ?? "") {
+        if let image = URL(string: article?.urlToImage ?? "") {
           cell.imageIcon.kf.setImage(with: image, placeholder: nil)
         }
       
@@ -199,9 +170,6 @@ extension CategoryVC: UITableViewDelegate, SkeletonTableViewDataSource {
   }
   //MARK: - SENDING DATA TO WEBVIEWVC
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    dbModel.fetchData()
-//    myTableView.reloadData()
-    
     tableView.deselectRow(at: indexPath, animated: true)
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let vc = storyboard.instantiateViewController(identifier: "WebviewVC") as! WebviewVC

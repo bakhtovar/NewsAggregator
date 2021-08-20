@@ -23,6 +23,7 @@ class APICall {
         
         guard let urlSearch = URL(string: "\(K.url)everything?q=\(category.searchText?.lowercased() ?? "" )&page=\(category.pageInt)&apiKey=\(K.APIKey)") else {return}
         
+        //MARK: - CHECHKING URL
         if category.categoryName != "" && category.id == nil {
             url = urlCat
         } else if category.id != nil {
@@ -30,16 +31,13 @@ class APICall {
         } else if category.categoryName == "" && category.id == nil {
             url = urlSearch
         }
-        
         if let url = url {
             let task = session.dataTask(with: url) { (data, respone, error) in
                 if error == nil && data != nil {
                     do {
                         let result = try JSONDecoder().decode(Articles.self, from: data!)
-    
                         completion(result)
                         print(url)
-                        
                     }
                     catch {
                         print("Error. Try Again")

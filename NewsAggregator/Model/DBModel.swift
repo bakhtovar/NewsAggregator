@@ -13,13 +13,13 @@ class CategoryDBModel: NSManagedObject {
     
     func saveUserData(art: ArticleDBModel ) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-//        let newArticle = NSEntityDescription.insertNewObject(forEntityName: "News", into: context) as NSManagedObject
-//        newArticle.setValue(art.urlToImage, forKey: "imageUrl")
-//       // newArticle.setValue(art.idButton, forKey: "idButton")
-//        newArticle.setValue(art.url, forKey: "linkUrl")
-//        newArticle.setValue(art.name, forKey: "name")
-//        newArticle.setValue(art.title, forKey: "titleName")
+
+        let newArticle = NSEntityDescription.insertNewObject(forEntityName: "News", into: context) as NSManagedObject
+        newArticle.setValue(art.urlToImage, forKey: "urlToImage")
+        newArticle.setValue(art.idButton, forKey: "idButton")
+        newArticle.setValue(art.url, forKey: "url")
+        newArticle.setValue(art.name, forKey: "name")
+        newArticle.setValue(art.title, forKey: "title")
         
         do {
             try context.save()
@@ -37,7 +37,7 @@ class ArticleDBModel: NSManagedObject {
     @NSManaged public var urlToImage: String?
     @NSManaged public var title: String?
     @NSManaged public var name: String?
-   // @NSManaged public var idButton: String?
+    @NSManaged public var idButton: String?
 }
 
 

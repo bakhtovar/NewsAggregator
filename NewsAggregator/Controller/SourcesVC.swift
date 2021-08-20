@@ -20,6 +20,7 @@ class SourcesVC: UIViewController {
     var sources: Sources?
     var sourcesDB = [SourceDB]()
     let dbObject = SourcesDBModel()
+    var network : Bool = false
     //MARK: - CREATE A COPY FOR FILTERING
     var filteredData: Sources?
     
@@ -45,8 +46,13 @@ class SourcesVC: UIViewController {
                 self.sourcesCollectionView.reloadData()
             }
         }
-        
-      
+    
+            if Reachability.isConnectedToNetwork(){
+               network = true
+                print("Internet Available!")
+            } else{
+                print("Internet Connection not Available!")
+            }
     }
 
     
@@ -89,7 +95,11 @@ extension SourcesVC :
     
     //MARK: - NUMBERS OF CELLS
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if network == false {
         return sourcesDB.count
+        } else {
+            return sources?.sources.count ?? 10
+        }
     }
     
     //MARK: - ASSIGNING THE DATA
@@ -97,11 +107,19 @@ extension SourcesVC :
     {
         
         
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SourcesCell", for: indexPath) as! SourcesCell
-        let vc = sourcesDB[indexPath.row]
-        cell.sourceTitleLabel.text = vc.name
-        cell.categoryTittleLabel.text = vc.category?.capitalized
+        
+        if network == false {
+            let vc = sourcesDB[indexPath.row]
+            cell.sourceTitleLabel.text = vc.name
+            cell.categoryTittleLabel.text = vc.category?.capitalized
+        } else {
+            let vc = sources?.sources[indexPath.row]
+            cell.sourceTitleLabel.text = vc?.name
+            cell.categoryTittleLabel.text = vc?.category?.capitalized
+        }
+        
+       
         
         switch cell.categoryTittleLabel.text?.lowercased() {
         case "general":
